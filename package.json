@@ -12,7 +12,9 @@
     "reinstall": "rm -rf 'yarn.lock' 'node_modules' && yarn",
     "dev": "next dev",
     "start": "next start",
-    "build": "next build"
+    "build": "next build",
+    "story": "start-storybook -p 8020",
+    "story:build": "build-storybook -c .storybook -o .storybook/build"
   },
   "engines": {
     "node": ">=12.0.0",
@@ -24,6 +26,11 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/eslint-parser": "^7.12.1",
+    "@storybook/addon-a11y": "^6.1.11",
+    "@storybook/addon-docs": "^6.1.11",
+    "@storybook/addon-storysource": "^6.1.11",
+    "@storybook/addon-viewport": "^6.1.11",
+    "@storybook/react": "^6.1.11",
     "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.17.0",
     "eslint-config-airbnb-base": "^14.2.1",
