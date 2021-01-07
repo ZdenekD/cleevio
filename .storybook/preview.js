@@ -1,5 +1,6 @@
 import {addDecorator, addParameters} from '@storybook/react';
 import React from 'react';
+import GlobalStyles from '../src/assets/globalStyles';
 
 const viewports = {
     320: {
@@ -32,5 +33,10 @@ const viewports = {
     },
 };
 
-addDecorator(storyFn => <>{storyFn()}</>);
+addDecorator(storyFn => (
+    <>
+    <GlobalStyles />
+    {storyFn()}
+    </>
+));
 addParameters({viewport: {viewports}});
