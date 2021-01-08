@@ -1,4 +1,4 @@
-import Document from 'next/document';
+import Document, {Html, Head, Main, NextScript} from 'next/document';
 import {ServerStyleSheet} from 'styled-components';
 
 class MyDocument extends Document {
@@ -26,6 +26,19 @@ class MyDocument extends Document {
         } finally {
             sheet.seal();
         }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    render() {
+        return (
+            <Html lang="en">
+                <Head />
+                <body>
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        );
     }
 }
 
