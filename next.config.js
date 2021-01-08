@@ -8,5 +8,9 @@ module.exports = {
 
         return config;
     },
+    env: {
+        API: process.env.API,
+        TOKEN: process.env.TOKEN,
+    },
     poweredByHeader: false,
 };
