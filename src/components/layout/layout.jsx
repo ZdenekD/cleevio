@@ -5,10 +5,10 @@ import styled from 'styled-components';
 const Wrapper = styled.main`
     min-height: 100vh;
     display: grid;
-    grid-template-columns: max-content auto minmax(400px, 25vw);
+    grid-template-columns: minmax(max-content, 15vw) auto minmax(400px, 25vw);
 `;
 
-const App = ({children}) => (
+const Layout = ({children}) => (
     <>
         <Head>
             <meta charSet="utf-8" />
@@ -29,6 +29,6 @@ const App = ({children}) => (
     </>
 );
 
-App.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};
+Layout.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};
 
-export default App;
+export default Layout;

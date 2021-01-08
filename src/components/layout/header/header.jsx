@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import Nav from '../../nav';
-import Button from '../../form/button';
+import Button from '../../../UI/form-control/button';
 import Logo from '../../../assets/images/logo.svg';
 
 const StyledWrapper = styled.header`
-    padding: 36px;
+    padding: 36px 36px 0;
+    display: grid;
+    grid-template-rows: 84px auto;
     background: #f9f9fa;
 
     > a {
@@ -26,8 +28,10 @@ const Header = () => (
                 <Logo />
             </a>
         </Link>
-        <Button icon="plus">New Trip</Button>
-        <Nav />
+        <div>
+            <Button icon="plus">New Trip</Button>
+            <Nav />
+        </div>
     </StyledWrapper>
 );
 

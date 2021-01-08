@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-    padding: 36px;
+    padding: 36px 36px 0;
+    display: grid;
+    grid-template-rows: 84px auto;
 
     h1 {
         margin-bottom: 32px;
