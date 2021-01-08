@@ -1,18 +1,31 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Nav from '../../nav';
-import Button from '../../../UI/form-control/button';
 import Logo from '../../../assets/images/logo.svg';
 
-const StyledWrapper = styled.header`
-    padding: 36px 36px 0;
+const Wrapper = styled.header`
     display: grid;
-    grid-template-rows: 84px auto;
-    background: #f9f9fa;
+    grid-area: header;
+    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 3fr);
+    grid-template-areas: "logo title subtitle";
 
     > a {
-        margin-bottom: 36px;
-        display: block;
+        padding: 2rem 2rem 0;
+        background: #f9f9fa;
+    }
+
+    h1 {
+        margin: 2rem 2rem 0;
+        grid-area: title;
+        font-size: 24px;
+        line-height: 33px;
+        border-bottom: 1px solid #f1f1f2;
+    }
+
+    h2 {
+        margin: 2rem 2rem 0;
+        font-size: 24px;
+        line-height: 36px;
     }
 
     svg {
@@ -20,19 +33,22 @@ const StyledWrapper = styled.header`
     }
 `;
 
-const Header = () => (
-    <StyledWrapper>
+const Header = ({title, subtitle}) => (
+    <Wrapper>
         <Link passHref href="/">
             <a href="/">
                 <span className="_visuallyhidden">Move to homepage</span>
                 <Logo />
             </a>
         </Link>
-        <div>
-            <Button icon="plus">New Trip</Button>
-            <Nav />
-        </div>
-    </StyledWrapper>
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+    </Wrapper>
 );
+
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+};
 
 export default Header;

@@ -1,13 +1,19 @@
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import styled from 'styled-components';
+import Button from '../../UI/form-control/button';
 import IconTimer from '../../assets/images/icons/timer.svg';
 import IconEdit from '../../assets/images/icons/edit-document.svg';
 import IconGlobe from '../../assets/images/icons/globe.svg';
 
 const Wrapper = styled.nav`
-    margin-top: 32px;
+    padding: 2rem 2rem 0;
+    background: #f9f9fa;
     font-weight: 600;
+
+    ul {
+        margin-top: 2rem;
+    }
 
     li {
 
@@ -39,16 +45,17 @@ const Anchor = styled.a`
     }
 
     svg {
-        margin-right: 12px;
+        margin-right: 1rem;
         fill: currentColor;
     }
 `;
 
-const Nav = () => {
+const Menu = () => {
     const router = useRouter();
 
     return (
         <Wrapper>
+            <Button icon="plus">New Trip</Button>
             <ul>
                 <li>
                     <Link passHref href="/">
@@ -79,4 +86,4 @@ const Nav = () => {
     );
 };
 
-export default Nav;
+export default Menu;

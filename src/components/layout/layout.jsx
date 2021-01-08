@@ -5,10 +5,14 @@ import styled from 'styled-components';
 const Wrapper = styled.main`
     min-height: 100vh;
     display: grid;
-    grid-template-columns: minmax(max-content, 15vw) auto minmax(400px, 25vw);
+    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 3fr);
+    grid-template-rows: minmax(90px, max-content) auto;
+    grid-template-areas:
+        "header header header"
+        "nav content aside";
 `;
 
-const Layout = ({children}) => (
+const App = ({children}) => (
     <>
         <Head>
             <meta charSet="utf-8" />
@@ -29,6 +33,6 @@ const Layout = ({children}) => (
     </>
 );
 
-Layout.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};
+App.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};
 
-export default Layout;
+export default App;

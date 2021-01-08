@@ -2,16 +2,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.aside`
-    padding: 36px 36px 0;
-    display: grid;
-    grid-template-rows: 84px auto;
+    padding: 2rem 2rem 0;
     border-left: 1px solid #f1f1f2;
-
-    h2 {
-        margin-bottom: 36px;
-        font-size: 24px;
-        line-height: 36px;
-    }
 
     p {
         margin-bottom: 2rem;
@@ -19,16 +11,12 @@ const Wrapper = styled.aside`
     }
 `;
 
-const Aside = ({title, children}) => (
+const Aside = ({children}) => (
     <Wrapper>
-        <h2>{title}</h2>
         {children}
     </Wrapper>
 );
 
-Aside.propTypes = {
-    title: PropTypes.string,
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
-};
+Aside.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};
 
 export default Aside;
