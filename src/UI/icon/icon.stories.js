@@ -14,7 +14,7 @@ const styles = `
     height: 32px;
 `;
 
-export default {title: 'Components/Icon'};
+export default {title: 'UI/Icons'};
 
 export const base = () => (
     <>
