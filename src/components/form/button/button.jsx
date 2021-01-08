@@ -57,6 +57,10 @@ const Wrapper = styled.button`
         display: flex;
         justify-content: space-between;
     ` : '')}
+
+    i {
+        margin-left: 20px;
+    }
 `;
 
 const Button = ({
@@ -76,7 +80,7 @@ const Button = ({
     >
         {children}
         {icon && (
-            <Icon name={icon} />
+            <Icon type={icon} />
         )}
     </Wrapper>
 );

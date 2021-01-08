@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
+import {rotate} from '../../helpers/keyframes';
 
-const getIcons = ({name}) => {
+const getIcons = ({type}) => {
     const styles = {
         plus: css`
             &::before,
@@ -13,7 +14,7 @@ const getIcons = ({name}) => {
             }
 
             &::before {
-                width: 16px;
+                width: 100%;
                 height: 2px;
                 top: 50%;
                 transform: translate(-50%, -50%);
@@ -21,7 +22,7 @@ const getIcons = ({name}) => {
 
             &::after {
                 width: 2px;
-                height: 16px;
+                height: 100%;
                 top: 0;
                 transform: translateX(-50%);
 
@@ -31,6 +32,7 @@ const getIcons = ({name}) => {
 
         `,
         loader: css`
+            animation: ${rotate} 0.8s linear infinite;
             border-radius: 50%;
             border-width: 1px 1px 0;
             border-style: solid;
@@ -38,26 +40,32 @@ const getIcons = ({name}) => {
         `,
     };
 
-    return styles[name];
+    return styles[type];
 };
 
 const Wrapper = styled.i`
-    width: 16px;
-    height: 16px;
+    display: block;
     position: relative;
     ${getIcons}
+    ${({styles}) => styles}
 `;
 
-const Icon = ({name}) => (
-    <Wrapper name={name} />
+const defaultStyles = `
+    width: 16px;
+    height: 16px;
+`;
+
+const Icon = ({type, styles = defaultStyles}) => (
+    <Wrapper type={type} styles={styles} />
 );
 
 Icon.propTypes = {
-    name: PropTypes.oneOf([
+    type: PropTypes.oneOf([
         'plus',
         'arrow',
         'loader',
     ]),
+    styles: PropTypes.string,
 };
 
 export default Icon;

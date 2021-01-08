@@ -5,7 +5,7 @@ const Wrapper = styled.section`
     padding: 36px;
 
     h1 {
-        margin-bottom: 18px;
+        margin-bottom: 32px;
         padding-bottom: 18px;
         font-size: 24px;
         line-height: 33px;
