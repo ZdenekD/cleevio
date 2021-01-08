@@ -5,7 +5,7 @@ const Row = styled.div`
     margin-bottom: 20px;
 `;
 
-export default {title: 'Components/Form/Button'};
+export default {title: 'UI/FormControl/Button'};
 
 export const base = () => (
     <>
