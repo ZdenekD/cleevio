@@ -5,7 +5,7 @@ import Icon from '../../icon';
 const getVariants = ({variant}) => {
     const styles = {
         primary: css`
-            background-color: #f8d964;
+            background-color: var(--color-yellow);
             color: rgba(0, 0, 0, 0.75);
 
             &:focus {
@@ -14,13 +14,23 @@ const getVariants = ({variant}) => {
 
             &:not([disabled]):focus,
             &:not([disabled]):hover {
-                background-color: #fec527;
+                background-color: var(--color-yellow-darken-1);
                 color: rgba(0, 0, 0, 1);
             }
         `,
         secondary: css`
-            background-color: #f9f9fa;
-            color: #76787b;
+            background-color: var(--color-gray-lighten-5);
+            color: var(--color-gray);
+
+            &:focus {
+                box-shadow: 0 0 0 4px rgba(249,249,250,.5);
+            }
+
+            &:not([disabled]):focus,
+            &:not([disabled]):hover {
+                background-color: var(--color-gray-lighten-3);
+                color: rgba(0, 0, 0, 1);
+            }
         `,
     };
 
@@ -41,6 +51,11 @@ const Wrapper = styled.button`
     border-radius: 10px;
     ${getVariants}
 
+    ${props => (props.icon && `
+        display: flex;
+        justify-content: space-between;
+    `)}
+
     &:focus,
     &:hover {
         transition-property: background color box-shadow;
@@ -49,14 +64,10 @@ const Wrapper = styled.button`
     }
 
     &:disabled {
+        color: var(--color-gray);
         opacity: 0.5;
         pointer-events: none;
     }
-
-    ${props => (props.icon ? `
-        display: flex;
-        justify-content: space-between;
-    ` : '')}
 
     i {
         margin-left: 20px;
@@ -70,6 +81,7 @@ const Button = ({
     label,
     icon,
     children,
+    onClick,
 }) => (
     <Wrapper
         type={type}
@@ -77,6 +89,7 @@ const Button = ({
         variant={variant}
         icon={icon}
         aria-label={label}
+        onClick={onClick}
     >
         {children}
         {icon && (
@@ -94,12 +107,16 @@ Button.propTypes = {
         'plus',
         'arrow',
         'loader',
+        'trash',
+        'edit',
     ]),
     children: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element,
+        PropTypes.node,
         PropTypes.number,
     ]),
+    onClick: PropTypes.func,
 };
 
 export default Button;

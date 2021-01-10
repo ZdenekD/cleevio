@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import getId from '../../../helpers/id';
+import getId from '../../../helpers/getId';
 
 const Checkbox = ({
     name,

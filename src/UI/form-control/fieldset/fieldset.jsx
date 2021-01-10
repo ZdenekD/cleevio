@@ -4,12 +4,13 @@ import styled from 'styled-components';
 const Wrapper = styled.fieldset`
     margin-top: 1rem;
     padding: 1rem;
-    background-color: #f9f9fa;
+    background-color: var(--color-gray-lighten-5);
     transition: background 0.2s ease-in-out;
     border-radius: 10px;
 
-    &:focus-within {
-        background-color: #f1f1f2;
+    &:focus-within,
+    &:hover {
+        background-color: var(--color-gray-lighten-4);
         transition: background 0.3s ease-in-out;
     }
 `;

@@ -1,20 +1,20 @@
 import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import getId from '../../../helpers/id';
+import getId from '../../../helpers/getId';
 
 const Component = styled.input`
     width: 100%;
     padding: 10px 20px;
     display: block;
-    background-color: #fff;
-    color: #76787b;
+    background-color: var(--color-white);
+    color: var(--color-gray);
     line-height: 20px;
     transition-property: border-color box-shadow;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     border-radius: 10px;
-    border: 1px solid #f1f1f2;
+    border: 1px solid var(--color-gray-lighten-4);
 
     &:focus {
         transition-property: border-color box-shadow;
@@ -28,24 +28,24 @@ const Component = styled.input`
         transition-property: border-color box-shadow;
         transition-duration: 0.3s;
         transition-timing-function: ease-in-out;
-        border-color: #e4e4e5;
+        border-color: var(--color-gray-lighten-3);
     }
 
     &:disabled {
-        background-color: #f1f1f2;
+        background-color: var(--color-gray-lighten-4);
         pointer-events: none;
-        border-color: #dddddf;
+        border-color: var(--color-gray-lighten-2);
     }
 
     &::placeholder {
-        color: #d0d0ce;
+        color: var(--color-gray-lighten-1);
     }
 
     ${props => (props.hasError ? `
         &,
         &:focus,
         &:hover {
-            border-color: #d33927;
+            border-color: var(--color-red);
         }
 
         &:focus {
@@ -61,7 +61,7 @@ const Component = styled.input`
 const Label = styled.label`
         margin-bottom: 1rem;
         display: block;
-        color: #000;
+        color: var(--color-black);
 `;
 
 const Input = forwardRef(({
