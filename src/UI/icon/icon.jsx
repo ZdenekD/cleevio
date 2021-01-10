@@ -64,6 +64,8 @@ Icon.propTypes = {
         'plus',
         'arrow',
         'loader',
+        'trash',
+        'edit',
     ]),
     styles: PropTypes.string,
 };
