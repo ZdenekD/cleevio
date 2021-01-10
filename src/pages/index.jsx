@@ -8,7 +8,8 @@ import Aside from '../components/layout/aside';
 import Trip from '../components/trip';
 import fetcher from '../helpers/fetcher';
 
-const url = `${process.env.API}/trip`;
+const urlTrips = `${process.env.API}/trip`;
+const urlCountries = `${process.env.API}/country`;
 const options = {
     method: 'GET',
     headers: {
@@ -17,8 +18,15 @@ const options = {
         Authorization: `Bearer ${process.env.TOKEN}`,
     },
 };
-const Homepage = ({trips}) => {
-    const {data, error} = useSWR(url, () => fetcher(url, options), {initialData: trips});
+const Homepage = ({trips = [], countries = []}) => {
+    const {data, error} = useSWR(urlTrips, () => fetcher(urlTrips, options), {initialData: trips});
+    const items = data.map(item => ({
+        ...item,
+        address: {
+            ...item.address,
+            country_code: countries.find(country => country.label === item.address.country)?.value,
+        },
+    }));
 
     return (
         <Layout>
@@ -27,9 +35,9 @@ const Homepage = ({trips}) => {
             <Content>
                 {error && (<div>ERROR: {error}</div>)}
 
-                {!data && (<div>Loading &hellip;</div>)}
+                {!items && (<div>Loading &hellip;</div>)}
 
-                {data.map(trip => (<Trip key={trip.id} data={trip} />))}
+                {items.map(trip => (<Trip key={trip.id} data={trip} />))}
             </Content>
             <Aside>
                 <p>
@@ -58,11 +66,12 @@ const Homepage = ({trips}) => {
 };
 
 export async function getStaticProps() {
-    const trips = await fetcher(url, options);
+    const trips = await fetcher(urlTrips, options);
+    const countries = await fetcher(urlCountries, options);
 
-    return {props: {trips}};
+    return {props: {trips, countries}};
 }
 
-Homepage.propTypes = {trips: PropTypes.arrayOf(PropTypes.object)};
+Homepage.propTypes = {trips: PropTypes.arrayOf(PropTypes.object), countries: PropTypes.arrayOf(PropTypes.object)};
 
 export default Homepage;
