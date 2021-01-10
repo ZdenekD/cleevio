@@ -11,7 +11,7 @@ const Wrapper = styled.header`
 
     > a {
         padding: 2rem 2rem 0;
-        background: #f9f9fa;
+        background: var(--color-gray-lighten-5);
     }
 
     h1 {
@@ -19,7 +19,7 @@ const Wrapper = styled.header`
         grid-area: title;
         font-size: 24px;
         line-height: 33px;
-        border-bottom: 1px solid #f1f1f2;
+        border-bottom: 1px solid var(--color-gray-lighten-4);
     }
 
     h2 {

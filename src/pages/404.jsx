@@ -1,15 +1,17 @@
 import Layout from '../components/layout';
 import Header from '../components/layout/header';
+import Nav from '../components/nav';
 import Content from '../components/layout/content';
 import Aside from '../components/layout/aside';
 
 const Error = () => (
     <Layout>
-        <Header />
-        <Content title="Error 404">
+        <Header title="Error 404" subtitle="Tips &amp; tricks" />
+        <Nav />
+        <Content>
             Page Not Found
         </Content>
-        <Aside title="Tips &amp; tricks">
+        <Aside>
             <p>
                 Company was established back in the year 2007 by 3 friends who were fascinated by the web and mobile
                 technologies and product design. Today, Cleevio is lead by its own CEO, David Bezdeka, and is working on

@@ -1,16 +1,18 @@
 import Layout from '../components/layout';
 import Header from '../components/layout/header';
+import Nav from '../components/nav';
 import Content from '../components/layout/content';
 import Aside from '../components/layout/aside';
 
 const Error = () => (
     <Layout>
-        <Header />
-        <Content title="Error">
+        <Header title="Error" subtitle="Tips &amp; tricks" />
+        <Nav />
+        <Content>
             We are sorry, something went wrong. If the error persists, please contact
             <a href="mailto:contact@support.com" title="Support e-mail address: contact@support.com">support</a>.
         </Content>
-        <Aside title="Tips &amp; tricks">
+        <Aside>
             <p>
                 Company was established back in the year 2007 by 3 friends who were fascinated by the web and mobile
                 technologies and product design. Today, Cleevio is lead by its own CEO, David Bezdeka, and is working on

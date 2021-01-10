@@ -8,7 +8,7 @@ import IconGlobe from '../../assets/images/icons/globe.svg';
 
 const Wrapper = styled.nav`
     padding: 2rem 2rem 0;
-    background: #f9f9fa;
+    background: var(--color-gray-lighten-5);
     font-weight: 600;
 
     ul {
@@ -30,7 +30,7 @@ const Anchor = styled.a`
     transition-property: color border-color;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
-    color: ${props => (props.isActive ? '#000' : '#97999b')};
+    color: ${props => (props.isActive ? 'var(--color-black)' : 'var(--color-gray-darken-1)')};
 
     &:focus,
     &:hover {
@@ -40,7 +40,7 @@ const Anchor = styled.a`
     }
 
     &[disabled] {
-        color: #97999b;
+        color: var(--color-gray-darken-1);
         pointer-events: none;
     }
 
