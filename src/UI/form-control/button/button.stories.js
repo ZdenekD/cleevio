@@ -15,6 +15,12 @@ export const base = () => (
         <Row>
             <Button variant="secondary">Secondary button</Button>
         </Row>
+        <Row>
+            <Button variant="red">Red button</Button>
+        </Row>
+        <Row>
+            <Button variant="blue">Blue button</Button>
+        </Row>
     </>
 );
 export const disabled = () => (
@@ -24,6 +30,12 @@ export const disabled = () => (
         </Row>
         <Row>
             <Button disabled variant="secondary">Secondary button</Button>
+        </Row>
+        <Row>
+            <Button disabled variant="red">Red button</Button>
+        </Row>
+        <Row>
+            <Button disabled variant="blue">Blue button</Button>
         </Row>
     </>
 );
@@ -35,6 +47,12 @@ export const plus = () => (
         <Row>
             <Button icon="plus" variant="secondary">Secondary button</Button>
         </Row>
+        <Row>
+            <Button icon="plus" variant="red">Red button</Button>
+        </Row>
+        <Row>
+            <Button icon="plus" variant="blue">Blue button</Button>
+        </Row>
     </>
 );
 export const arrow = () => (
@@ -45,6 +63,12 @@ export const arrow = () => (
         <Row>
             <Button icon="arrow" variant="secondary">Secondary button</Button>
         </Row>
+        <Row>
+            <Button icon="arrow" variant="red">Red button</Button>
+        </Row>
+        <Row>
+            <Button icon="arrow" variant="blue">Blue button</Button>
+        </Row>
     </>
 );
 export const loading = () => (
@@ -54,6 +78,12 @@ export const loading = () => (
         </Row>
         <Row>
             <Button icon="loader" variant="secondary">Secondary button</Button>
+        </Row>
+        <Row>
+            <Button icon="loader" variant="red">Red button</Button>
+        </Row>
+        <Row>
+            <Button icon="loader" variant="blue">Blue button</Button>
         </Row>
     </>
 );

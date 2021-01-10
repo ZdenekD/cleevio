@@ -1,107 +1,136 @@
+import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import Icon from '../../icon';
 
-const getVariants = ({variant}) => {
-    const styles = {
-        primary: css`
-            background-color: var(--color-yellow);
-            color: rgba(0, 0, 0, 0.75);
-
-            &:focus {
-                box-shadow: 0 0 0 4px rgba(254,197,39,.5);
-            }
-
-            &:not([disabled]):focus,
-            &:not([disabled]):hover {
-                background-color: var(--color-yellow-darken-1);
-                color: rgba(0, 0, 0, 1);
-            }
-        `,
-        secondary: css`
-            background-color: var(--color-gray-lighten-5);
-            color: var(--color-gray);
-
-            &:focus {
-                box-shadow: 0 0 0 4px rgba(249,249,250,.5);
-            }
-
-            &:not([disabled]):focus,
-            &:not([disabled]):hover {
-                background-color: var(--color-gray-lighten-3);
-                color: rgba(0, 0, 0, 1);
-            }
-        `,
-    };
-
-    return styles[variant];
-};
-
 const Wrapper = styled.button`
-    min-width: 200px;
-    padding: 15px 20px;
+    ${props => (props.variant === 'primary' && `
+        --button-background: var(--color-yellow);
+        --button-hover-background: var(--color-yellow-darken-1);
+        --button-outline-color: rgba(254,197,39,.5);
+    `) || (props.variant === 'secondary' && `
+        --button-background: var(--color-gray-lighten-4);
+        --button-hover-background: var(--color-gray-lighten-2);
+        --button-color: var(--color-gray);
+        --button-outline-color: rgba(249,249,250,.5);
+        --button-icon-color: var(--color-gray);
+    `) || (props.variant === 'red' && `
+        --button-background: var(--color-red-lighten-5);
+        --button-hover-background: var(--color-red-lighten-4);
+        --button-outline-color: rgba(211, 57, 39, .5);
+        --button-icon-color: var(--color-red);
+    `) || (props.variant === 'blue' && `
+        --button-background: var(--color-blue);
+        --button-hover-background: var(--color-blue-darken-1);
+        --button-outline-color: rgba(59,130,246,.5);
+        --button-disabled-color: var(--color-white);
+    `)}
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--button-background);
+    color: var(--button-color, rgba(0, 0, 0, 0.75));
     font-size: 14px;
     line-height: 18px;
     font-weight: 600;
     text-align: left;
     cursor: pointer;
     transition-property: background color box-shadow;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
+    transition-duration: var(--transition-duration-out);
+    transition-timing-function: var(--transition-timing);
     border-radius: 10px;
-    ${getVariants}
 
     ${props => (props.icon && `
         display: flex;
         justify-content: space-between;
     `)}
 
-    &:focus,
-    &:hover {
-        transition-property: background color box-shadow;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
+    &:focus {
+        box-shadow: 0 0 0 4px var(--button-outline-color);
+    }
+
+    &:not([disabled]):focus,
+    &:not([disabled]):hover {
+        background-color: var(--button-hover-background);
+        color: rgba(0, 0, 0, 1);
+        transition-duration: var(--transition-duration-in);
     }
 
     &:disabled {
-        color: var(--color-gray);
+        color: var(--button-disabled-color, var(--color-gray));
         opacity: 0.5;
         pointer-events: none;
     }
 
-    i {
-        margin-left: 20px;
+    span {
+
+        + i {
+            margin-left: 15px;
+        }
     }
+
+    i {
+        color: var(--button-icon-color, var(--button-color));
+
+        svg {
+            fill: var(--button-icon-color, var(--button-color));
+        }
+    }
+
+    ${({styles}) => styles}
+`;
+const Link = styled.a`
+    text-decoration: none;
 `;
 
-const Button = ({
+const Button = forwardRef(({
     type = 'button',
     disabled,
     variant = 'primary',
     label,
     icon,
+    styles,
+    href,
+    asLink,
     children,
     onClick,
-}) => (
+}, ref) => (
     <Wrapper
-        type={type}
+        ref={ref}
+        type={!asLink ? type : undefined}
         disabled={disabled}
         variant={variant}
         icon={icon}
+        styles={styles}
         aria-label={label}
+        href={href}
+        as={asLink && Link}
         onClick={onClick}
     >
-        {children}
+        {children && (
+            <span>{children}</span>
+        )}
+
         {icon && (
             <Icon type={icon} />
         )}
     </Wrapper>
-);
+));
+
+Button.displayName = 'Button';
 
 Button.propTypes = {
     type: PropTypes.oneOf(['button', 'submit']),
     disabled: PropTypes.bool,
-    variant: PropTypes.oneOf(['primary', 'secondary']),
+    variant: PropTypes.oneOf([
+        'primary',
+        'secondary',
+        'red',
+        'blue',
+    ]),
     label: PropTypes.string,
     icon: PropTypes.oneOf([
         'plus',
@@ -110,12 +139,10 @@ Button.propTypes = {
         'trash',
         'edit',
     ]),
-    children: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.element,
-        PropTypes.node,
-        PropTypes.number,
-    ]),
+    styles: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    href: PropTypes.string,
+    asLink: PropTypes.bool,
     onClick: PropTypes.func,
 };
 
