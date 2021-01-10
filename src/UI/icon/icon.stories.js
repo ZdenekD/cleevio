@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Icon from './icon';
+import Icon from '.';
 
 const Wrapper = styled.div`
     display: grid;
@@ -34,6 +34,9 @@ export const base = () => (
             </Row>
             <Row>
                 <Icon type="edit" styles={styles} />
+            </Row>
+            <Row>
+                <Icon type="check" styles={styles} />
             </Row>
         </Wrapper>
     </>

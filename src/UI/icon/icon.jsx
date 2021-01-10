@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
+import Check from '../../assets/images/icons/check.svg';
+import Star from '../../assets/images/icons/star.svg';
 import Trash from '../../assets/images/icons/trash.svg';
 import {rotate} from '../../helpers/keyframes';
 
@@ -43,7 +45,7 @@ const getIcons = ({type}) => {
     return styles[type];
 };
 
-const Wrapper = styled.i`
+const Component = styled.i`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,11 +67,13 @@ const defaultStyles = `
 `;
 
 const Icon = ({type, styles = defaultStyles}) => (
-    <Wrapper type={type} styles={styles}>
+    <Component type={type} styles={styles}>
         {type === 'arrow' && <Arrow />}
         {type === 'trash' && <Trash />}
         {type === 'edit' && <Edit />}
-    </Wrapper>
+        {type === 'check' && <Check />}
+        {type === 'star' && <Star />}
+    </Component>
 );
 
 Icon.propTypes = {
@@ -79,6 +83,8 @@ Icon.propTypes = {
         'loader',
         'trash',
         'edit',
+        'check',
+        'star',
     ]),
     styles: PropTypes.string,
 };
