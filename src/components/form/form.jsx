@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Wrapper = styled.form`
+const Component = styled.form`
     width: 100%;
     max-width: 680px;
     min-height: 100%;
@@ -9,9 +9,9 @@ const Wrapper = styled.form`
 `;
 
 const Form = ({children, onSubmit}) => (
-    <Wrapper onSubmit={onSubmit}>
+    <Component onSubmit={onSubmit}>
         {children}
-    </Wrapper>
+    </Component>
 );
 
 Form.propTypes = {

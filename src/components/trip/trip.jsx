@@ -23,7 +23,7 @@ const pipeline = css`
         content: '';
     }
 `;
-const Wrapper = styled.article`
+const Component = styled.article`
     margin-top: 1rem;
     padding: 0.75rem 1rem;
     display: grid;
@@ -94,7 +94,7 @@ const Trip = ({data}) => {
     };
 
     return (
-        <Wrapper>
+        <Component>
             <Flag>
                 {address.country_code ? (
                     <Image src={`/flags/${address.country_code}.svg`} alt={`${address.country} flag`} width="48" height="48" />
@@ -121,7 +121,7 @@ const Trip = ({data}) => {
             </Controls>
             <Company>{companyName}</Company>
             <Address>{address?.city} | {address?.street}, {address?.zip}</Address>
-        </Wrapper>
+        </Component>
     );
 };
 

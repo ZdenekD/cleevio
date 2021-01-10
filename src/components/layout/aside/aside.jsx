@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Wrapper = styled.aside`
+const Component = styled.aside`
     padding: 2rem 2rem 0;
     border-left: 1px solid var(--color-gray-lighten-4);
 
@@ -12,9 +12,9 @@ const Wrapper = styled.aside`
 `;
 
 const Aside = ({children}) => (
-    <Wrapper>
+    <Component>
         {children}
-    </Wrapper>
+    </Component>
 );
 
 Aside.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};

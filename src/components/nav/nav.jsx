@@ -6,7 +6,7 @@ import IconTimer from '../../assets/images/icons/timer.svg';
 import IconEdit from '../../assets/images/icons/edit-document.svg';
 import IconGlobe from '../../assets/images/icons/globe.svg';
 
-const Wrapper = styled.nav`
+const Component = styled.nav`
     padding: 2rem 2rem 0;
     background: var(--color-gray-lighten-5);
     font-weight: 600;
@@ -22,21 +22,18 @@ const Wrapper = styled.nav`
         }
     }
 `;
-
 const Anchor = styled.a`
     display: flex;
     align-items: center;
     text-decoration: none;
     transition-property: color border-color;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
+    transition-duration: var(--transition-duration-out);
+    transition-timing-function: var(--transition-timing);
     color: ${props => (props.isActive ? 'var(--color-black)' : 'var(--color-gray-darken-1)')};
 
     &:focus,
     &:hover {
-        transition-property: color border-color;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
+        transition-duration: var(--transition-duration-in);
     }
 
     &[disabled] {
@@ -49,12 +46,11 @@ const Anchor = styled.a`
         fill: currentColor;
     }
 `;
-
 const Menu = () => {
     const router = useRouter();
 
     return (
-        <Wrapper>
+        <Component>
             <Link passHref href="/trip/new">
                 <Button asLink href="/trip/new" icon="plus" styles={'min-width: 100%;'}>New Trip</Button>
             </Link>
@@ -84,7 +80,7 @@ const Menu = () => {
                     </Link>
                 </li>
             </ul>
-        </Wrapper>
+        </Component>
     );
 };
 

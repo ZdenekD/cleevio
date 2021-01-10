@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Logo from '../../../assets/images/logo.svg';
 
-const Wrapper = styled.header`
+const Component = styled.header`
     display: grid;
     grid-area: header;
     grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 3fr);
@@ -34,7 +34,7 @@ const Wrapper = styled.header`
 `;
 
 const Header = ({title, subtitle}) => (
-    <Wrapper>
+    <Component>
         <Link passHref href="/">
             <a href="/">
                 <span className="_visuallyhidden">Move to homepage</span>
@@ -43,7 +43,7 @@ const Header = ({title, subtitle}) => (
         </Link>
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
-    </Wrapper>
+    </Component>
 );
 
 Header.propTypes = {

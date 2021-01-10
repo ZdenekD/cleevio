@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import styled from 'styled-components';
 
-const Wrapper = styled.main`
+const Component = styled.main`
     min-height: 100vh;
     display: grid;
     grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 3fr);
@@ -27,9 +27,9 @@ const App = ({children}) => (
                 crossOrigin="anonymous"
             />
         </Head>
-        <Wrapper>
+        <Component>
             {children}
-        </Wrapper>
+        </Component>
     </>
 );
 
