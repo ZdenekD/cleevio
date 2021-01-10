@@ -20,6 +20,13 @@ cd code/
 yarn
 ```
 
+### Env
+
+Environment settings
+
+API - Api endpoint
+TOKEN - Bearer token to using API
+
 ### Development
 
 Run development
