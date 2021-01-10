@@ -7,20 +7,12 @@ import Content from '../components/layout/content';
 import Aside from '../components/layout/aside';
 import Trip from '../components/trip';
 import fetcher from '../helpers/fetcher';
+import options from '../helpers/options';
 
-const urlTrips = `${process.env.API}/trip`;
-const urlCountries = `${process.env.API}/country`;
-const options = {
-    method: 'GET',
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.TOKEN}`,
-    },
-};
-const Homepage = ({trips = [], countries = []}) => {
-    const {data, error} = useSWR(urlTrips, () => fetcher(urlTrips, options), {initialData: trips});
-    const items = data.map(item => ({
+const Homepage = ({countries = []}) => {
+    const url = `${process.env.API}/trip`;
+    const {data, error} = useSWR(url, () => fetcher(url, options.get()));
+    const items = data?.map(item => ({
         ...item,
         address: {
             ...item.address,
@@ -37,7 +29,7 @@ const Homepage = ({trips = [], countries = []}) => {
 
                 {!items && (<div>Loading &hellip;</div>)}
 
-                {items.map(trip => (<Trip key={trip.id} data={trip} />))}
+                {items?.map(trip => (<Trip key={trip.id} data={trip} />))}
             </Content>
             <Aside>
                 <p>
@@ -66,12 +58,11 @@ const Homepage = ({trips = [], countries = []}) => {
 };
 
 export async function getStaticProps() {
-    const trips = await fetcher(urlTrips, options);
-    const countries = await fetcher(urlCountries, options);
+    const countries = await fetcher(`${process.env.API}/country`, options.get());
 
-    return {props: {trips, countries}};
+    return {props: {countries}};
 }
 
-Homepage.propTypes = {trips: PropTypes.arrayOf(PropTypes.object), countries: PropTypes.arrayOf(PropTypes.object)};
+Homepage.propTypes = {countries: PropTypes.arrayOf(PropTypes.object)};
 
 export default Homepage;

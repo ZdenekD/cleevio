@@ -55,7 +55,9 @@ const Menu = () => {
 
     return (
         <Wrapper>
-            <Button icon="plus">New Trip</Button>
+            <Link passHref href="/trip/new">
+                <Button asLink href="/trip/new" icon="plus" styles={'min-width: 100%;'}>New Trip</Button>
+            </Link>
             <ul>
                 <li>
                     <Link passHref href="/">
