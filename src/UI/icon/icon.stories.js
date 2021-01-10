@@ -8,6 +8,7 @@ const Wrapper = styled.div`
 `;
 const Row = styled.div`
     color: #f8d964;
+    fill: #f8d964;
 `;
 const styles = `
     width: 32px;
@@ -27,6 +28,12 @@ export const base = () => (
             </Row>
             <Row>
                 <Icon type="loader" styles={styles} />
+            </Row>
+            <Row>
+                <Icon type="trash" styles={styles} />
+            </Row>
+            <Row>
+                <Icon type="edit" styles={styles} />
             </Row>
         </Wrapper>
     </>

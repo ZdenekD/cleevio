@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
+import Arrow from '../../assets/images/icons/arrow.svg';
+import Edit from '../../assets/images/icons/edit.svg';
+import Trash from '../../assets/images/icons/trash.svg';
 import {rotate} from '../../helpers/keyframes';
 
 const getIcons = ({type}) => {
@@ -28,9 +31,6 @@ const getIcons = ({type}) => {
 
             }
         `,
-        arrow: css`
-
-        `,
         loader: css`
             animation: ${rotate} 0.8s linear infinite;
             border-radius: 50%;
@@ -44,9 +44,18 @@ const getIcons = ({type}) => {
 };
 
 const Wrapper = styled.i`
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
     ${getIcons}
+
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
     ${({styles}) => styles}
 `;
 
@@ -56,7 +65,11 @@ const defaultStyles = `
 `;
 
 const Icon = ({type, styles = defaultStyles}) => (
-    <Wrapper type={type} styles={styles} />
+    <Wrapper type={type} styles={styles}>
+        {type === 'arrow' && <Arrow />}
+        {type === 'trash' && <Trash />}
+        {type === 'edit' && <Edit />}
+    </Wrapper>
 );
 
 Icon.propTypes = {
