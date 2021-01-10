@@ -1,8 +1,8 @@
 import {createGlobalStyle} from 'styled-components';
-import reset from './global/reset';
-import easing from './global/easing';
-import variables from './global/variables';
-import colors from './global/colors';
+import reset from './styles/reset';
+import easing from './styles/easing';
+import variables from './styles/variables';
+import colors from './styles/colors';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
