@@ -11,23 +11,18 @@ const Component = styled.input`
     color: var(--color-gray);
     line-height: 20px;
     transition-property: border-color box-shadow;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
+    transition-duration: var(--transition-duration-out);
+    transition-timing-function: var(--transition-timing);
     border-radius: 10px;
     border: 1px solid var(--color-gray-lighten-4);
 
     &:focus {
-        transition-property: border-color box-shadow;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
         box-shadow: 0 0 0 2px rgba(59,130,246,0.5);
     }
 
     &:focus,
     &:hover {
-        transition-property: border-color box-shadow;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
+        transition-duration: var(--transition-duration-in);
         border-color: var(--color-gray-lighten-3);
     }
 

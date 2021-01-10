@@ -1,4 +1,4 @@
-import Input from './input';
+import Input from '.';
 
 export default {title: 'UI/FormControl/Input'};
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from './button';
+import Button from '.';
 
 const Row = styled.div`
     margin-bottom: 20px;
@@ -39,51 +39,25 @@ export const disabled = () => (
         </Row>
     </>
 );
-export const plus = () => (
+export const icons = () => (
     <>
         <Row>
-            <Button icon="plus">Primary button</Button>
+            <Button icon="plus">Button</Button>
         </Row>
         <Row>
-            <Button icon="plus" variant="secondary">Secondary button</Button>
+            <Button icon="arrow">Primary button with arrow</Button>
         </Row>
         <Row>
-            <Button icon="plus" variant="red">Red button</Button>
+            <Button icon="loader">Loading button</Button>
         </Row>
         <Row>
-            <Button icon="plus" variant="blue">Blue button</Button>
-        </Row>
-    </>
-);
-export const arrow = () => (
-    <>
-        <Row>
-            <Button icon="arrow">Primary button</Button>
+            <Button icon="trash" />
         </Row>
         <Row>
-            <Button icon="arrow" variant="secondary">Secondary button</Button>
+            <Button icon="star" />
         </Row>
         <Row>
-            <Button icon="arrow" variant="red">Red button</Button>
-        </Row>
-        <Row>
-            <Button icon="arrow" variant="blue">Blue button</Button>
-        </Row>
-    </>
-);
-export const loading = () => (
-    <>
-        <Row>
-            <Button icon="loader">Primary button</Button>
-        </Row>
-        <Row>
-            <Button icon="loader" variant="secondary">Secondary button</Button>
-        </Row>
-        <Row>
-            <Button icon="loader" variant="red">Red button</Button>
-        </Row>
-        <Row>
-            <Button icon="loader" variant="blue">Blue button</Button>
+            <Button icon="edit">Edit button with little longer description</Button>
         </Row>
     </>
 );

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Wrapper = styled.fieldset`
+const Component = styled.fieldset`
     margin-top: 1rem;
     padding: 1rem;
     background-color: var(--color-gray-lighten-5);
@@ -16,9 +16,9 @@ const Wrapper = styled.fieldset`
 `;
 
 const Fieldset = ({children}) => (
-    <Wrapper>
+    <Component>
         {children}
-    </Wrapper>
+    </Component>
 );
 
 Fieldset.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Icon from '../../icon';
 
-const Wrapper = styled.button`
+const Component = styled.button`
     ${props => (props.variant === 'primary' && `
         --button-background: var(--color-yellow);
         --button-hover-background: var(--color-yellow-darken-1);
@@ -98,7 +98,7 @@ const Button = forwardRef(({
     children,
     onClick,
 }, ref) => (
-    <Wrapper
+    <Component
         ref={ref}
         type={!asLink ? type : undefined}
         disabled={disabled}
@@ -117,7 +117,7 @@ const Button = forwardRef(({
         {icon && (
             <Icon type={icon} />
         )}
-    </Wrapper>
+    </Component>
 ));
 
 Button.displayName = 'Button';
@@ -138,6 +138,7 @@ Button.propTypes = {
         'loader',
         'trash',
         'edit',
+        'star',
     ]),
     styles: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
