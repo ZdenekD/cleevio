@@ -7,24 +7,26 @@ const Component = styled.div`
     ${props => (props.variant === 'info' && `
         --message-background: var(--color-blue-lighten-3);
         --message-color: var(--color-blue);
+        --message-border: var(--color-blue-lighten-2);
     `) || (props.variant === 'warning' && `
         --message-background: var(--color-yellow-lighten-3);
         --message-color: var(--color-gray);
-        --message-border: var(--color-yellow);
+        --message-border: var(--color-yellow-lighten-2);
     `) || (props.variant === 'danger' && `
-        --message-background: var(--color-red-lighten-3);
+        --message-background: var(--color-red-lighten-4);
         --message-color: var(--color-red-darken-1);
+        --message-border: var(--color-red-lighten-3);
     `)}
 
     width: 100%;
     max-width: 680px;
-    margin: 1rem;
+    margin: 1rem auto;
     padding: 1rem 2rem 1rem 1rem;
     position: relative;
     background-color: var(--message-background, var(--color-gray-lighten-3));
     color: var(--message-color, var(--color-gray));
     border-radius: var(--border-radius);
-    border: 1px solid var(--message-border, currentColor);
+    border: 1px solid var(--message-border, var(--color-gray-lighten-2));
 `;
 const styles = `
     min-width: 2rem;
