@@ -1,63 +1,104 @@
-import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import {useId} from 'react-id-generator';
+import Component from 'react-select';
+import flagComponents from './flags';
 import prefix from '../../../helpers/prefix';
 
-const Component = styled.select`
-    width: 100%;
-    padding: 10px 1rem;
-    display: block;
-    background-color: var(--color-white);
-    color: var(--color-gray);
-    line-height: 20px;
-    transition-property: border-color box-shadow;
-    transition-duration: var(--transition-duration-out);
-    transition-timing-function: var(--transition-timing);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--color-gray-lighten-4);
+const styles = {
+    control: (style, state) => ({
+        ...style,
+        minHeight: 0,
+        padding: '2px 1rem',
+        lineHeight: '20px',
+        boxShadow: 'none',
+        borderRadius: state.menuIsOpen ? 'var(--border-radius) var(--border-radius) 0 0' : 'var(--border-radius)',
+        borderColor: 'var(--color-gray-lighten-3)',
 
-    &:focus {
-        box-shadow: 0 0 0 2px rgba(59,130,246,0.5);
-    }
+        '&:hover': {boxShadow: 'none'},
+    }),
+    valueContainer: style => ({
+        ...style,
+        padding: 0,
+    }),
+    singleValue: style => ({
+        ...style,
+        margin: 0,
+        display: 'flex',
+        alignItems: 'center',
+    }),
+    input: style => ({
+        ...style,
+        marginLeft: '30px',
+    }),
+    indicatorSeparator: () => ({display: 'none'}),
+    dropdownIndicator: style => ({
+        ...style,
+        padding: '8px 0 8px 1rem',
+    }),
+    menu: style => ({
+        ...style,
+        marginTop: 0,
+        boxShadow: 'none',
+        borderRadius: '0 0 var(--border-radius) var(--border-radius)',
+        border: '1px solid var(--color-gray-lighten-3)',
+        borderTop: 'none',
+    }),
+    menuList: style => ({
+        ...style,
+        padding: 0,
+    }),
+    option: (style, state) => ({
+        ...style,
+        padding: '.75rem 1rem',
+        display: 'flex',
+        alignItems: 'center',
+        background: state.isSelected || state.isFocused ? 'var(--color-gray-lighten-4)' : 'var(--color-white)',
+        color: 'var(--color-black)',
+        transition: 'background 0.3s linear',
+        borderTop: '1px solid var(--color-gray-lighten-3)',
 
-    &:focus,
-    &:hover {
-        transition-duration: var(--transition-duration-in);
-        border-color: var(--color-gray-lighten-3);
-    }
+        '&:hover': {transition: 'background 0.05s linear'},
 
-    &:disabled {
-        background-color: var(--color-gray-lighten-4);
-        pointer-events: none;
-        border-color: var(--color-gray-lighten-2);
-    }
-`;
-const Select = forwardRef(({
+        '&:first-of-type': {borderTop: 'none'},
+    }),
+};
+const Select = ({
     name,
+    label,
+    defaultLabel,
+    disabled,
     data,
-    defaultLabel = 'Select',
-}, ref) => {
+    variant = 'simple',
+    onChange,
+}) => {
     const [id] = useId(1, prefix);
+    const components = variant === 'flags' ? flagComponents : null;
 
     return (
-        <>
-            <Component ref={ref} name={name} id={id}>
-                <option>{defaultLabel}</option>
-                {data?.length > 0 && data.map(item => (
-                    <option key={item.value} value={item.value}>{item.label}</option>
-                ))}
-            </Component>
-        </>
+        <Component
+            id={id}
+            name={name}
+            placeholder={defaultLabel}
+            aria-label={label}
+            options={data}
+            styles={styles}
+            isDisabled={disabled}
+            components={components}
+            onChange={onChange}
+        />
     );
-});
+};
 
 Select.displayName = 'Select';
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,
-    data: PropTypes.array,
+    label: PropTypes.string.isRequired,
     defaultLabel: PropTypes.string,
+    disabled: PropTypes.bool,
+    data: PropTypes.array,
+    variant: PropTypes.oneOf(['simple', 'flags']),
+    onChange: PropTypes.func,
 };
 
 export default Select;

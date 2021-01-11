@@ -33,9 +33,13 @@ const ToggleSection = styled.div`
 `;
 const TripForm = ({data}) => {
     const [countriesList, setCountriesList] = React.useState([]);
+    const [country, setCountry] = React.useState();
     const {data: countries, error} = useFetch(countriesList.length < 1 ? 'country' : null);
     const {register, errors, handleSubmit, watch, setValue} = useForm({mode: 'onBlur'});
     const isOpen = watch('covid') === 'Yes';
+    const handleCountryChange = value => {
+        setCountry(value.label);
+    };
     const onSubmit = values => {
         const body = {
             start_date: values.start_date,
@@ -44,7 +48,7 @@ const TripForm = ({data}) => {
             address: {
                 street: values.street || '',
                 city: values.city || '',
-                country: values.country || '',
+                country: country || '',
                 zip: values.zip || '',
             },
             covid: values.covid === 'Yes',
@@ -80,8 +84,11 @@ const TripForm = ({data}) => {
                     <Legend required>Where do you want to go?</Legend>
                     <Select
                         name="country"
+                        label="Choose a country"
                         data={countriesList}
                         defaultLabel="Select country ..."
+                        variant='flags'
+                        onChange={handleCountryChange}
                     />
                 </Fieldset>
                 <Fieldset>
