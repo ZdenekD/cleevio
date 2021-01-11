@@ -1,18 +1,18 @@
 import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import getId from '../../../helpers/getId';
+import {useId} from 'react-id-generator';
+import prefix from '../../../helpers/prefix';
 
 const Component = styled.input`
     width: 16px;
     height: 16px;
     margin-right: 12px;
     padding: 2px;
-    display: inline-flex;
+    display: inline-block;
     position: relative;
     appearance: none;
     background-color: var(--color-white);
-    background-clip: content-box;
     vertical-align: middle;
     transition-property: background-color border-color;
     transition-duration: var(--transition-duration-out);
@@ -23,6 +23,7 @@ const Component = styled.input`
 
     &:checked {
         background-color: var(--color-black);
+        background-clip: content-box;
         transition-duration: var(--transition-duration-in);
         border-color: var(--color-black);
     }
@@ -34,7 +35,8 @@ const Component = styled.input`
 `;
 const Label = styled.label`
     padding: 12px;
-    background-color: var(--color-gray-lighten-5);
+    display: inline-block;
+    background-color: var(--color-gray-lighten-3);
     color: var(--color-gray);
     transition-property: color background-color;
     transition-duration: var(--transition-duration-out);
@@ -44,7 +46,7 @@ const Label = styled.label`
 
     &:focus,
     &:hover {
-        background-color: var(--color-gray-lighten-4);
+        background-color: var(--color-gray-lighten-2);
         color: var(--color-black);
         transition-duration: var(--transition-duration-in);
     }
@@ -59,19 +61,18 @@ const Label = styled.label`
         margin-left: 1rem;
     }
 `;
-
 const Radio = forwardRef(({
     name,
     label,
     required,
     disabled,
 }, ref) => {
-    const id = getId();
+    const [id] = useId(1, prefix);
 
     return (
         <>
             <Label htmlFor={id} disabled={disabled}>
-                <Component ref={ref} id={id} name={name} type="radio" disabled={disabled} required={required} aria-label={label} />
+                <Component ref={ref} id={id} name={name} type="radio" disabled={disabled} required={required} value={label} />
                 {label}
             </Label>
         </>

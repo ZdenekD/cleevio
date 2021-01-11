@@ -1,8 +1,9 @@
 import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {useId} from 'react-id-generator';
 import Icon from '../../icon';
-import getId from '../../../helpers/getId';
+import prefix from '../../../helpers/prefix';
 
 const Component = styled.input`
     + i {
@@ -52,7 +53,7 @@ const Component = styled.input`
 `;
 const Label = styled.label`
     padding: 12px;
-    background-color: var(--color-gray-lighten-5);
+    background-color: var(--color-gray-lighten-3);
     color: var(--color-gray);
     transition-property: color background-color;
     transition-duration: var(--transition-duration-out);
@@ -62,7 +63,7 @@ const Label = styled.label`
 
     &:focus,
     &:hover {
-        background-color: var(--color-gray-lighten-4);
+        background-color: var(--color-gray-lighten-2);
         color: var(--color-black);
         transition-duration: var(--transition-duration-in);
     }
@@ -77,19 +78,18 @@ const Label = styled.label`
         margin-left: 1rem;
     }
 `;
-
 const Checkbox = forwardRef(({
     name,
     label,
     required,
     disabled,
 }, ref) => {
-    const id = getId();
+    const [id] = useId(1, prefix);
 
     return (
         <>
             <Label htmlFor={id} disabled={disabled}>
-                <Component ref={ref} id={id} name={name} type="checkbox" disabled={disabled} required={required} className="_visuallyhidden" aria-label={label} />
+                <Component ref={ref} id={id} name={name} type="checkbox" disabled={disabled} required={required} className="_visuallyhidden" value={label} />
                 <Icon type="check" />
                 {label}
             </Label>

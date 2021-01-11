@@ -1,19 +1,32 @@
 import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import getId from '../../../helpers/getId';
+import {useId} from 'react-id-generator';
+import prefix from '../../../helpers/prefix';
 
+const Control = styled.div`
+    margin-top: 1rem;
+    display: grid;
+    grid-template-areas:
+        "label message"
+        "input input";
+
+    &:first-of-type {
+        margin-top: 0;
+    }
+`;
 const Component = styled.input`
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 1rem;
     display: block;
+    grid-area: input;
     background-color: var(--color-white);
     color: var(--color-gray);
     line-height: 20px;
     transition-property: border-color box-shadow;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     border: 1px solid var(--color-gray-lighten-4);
 
     &:focus {
@@ -47,18 +60,29 @@ const Component = styled.input`
             box-shadow: 0 0 0 2px rgba(211,57,39,0.5);
         }
     ` : '')}
-
-    + label,
-    + input {
-        margin-top: 1rem;
-    }
 `;
 const Label = styled.label`
-        margin-bottom: 1rem;
-        display: block;
-        color: var(--color-black);
+    margin-bottom: .5rem;
+    display: block;
+    grid-area: label;
+    color: var(--color-black);
+    line-height: 20px;
 `;
-
+const Required = styled.span`
+    display: inline-block;
+    vertical-align: sup;
+    color: var(--color-red-lighten-2);
+    font-size: .75rem;
+`;
+const Message = styled.span`
+    display: block;
+    grid-area: message;
+    position: relative;
+    color: var(--color-red);
+    font-size: .8rem;
+    line-height: 20px;
+    text-align: right;
+`;
 const Input = forwardRef(({
     name,
     label,
@@ -66,23 +90,26 @@ const Input = forwardRef(({
     placeholder,
     required,
     disabled,
-    hasError,
+    error,
 }, ref) => {
-    const id = getId();
+    const [id] = useId(1, prefix);
 
     return (
         <>
-            <Label htmlFor={id}>{label}</Label>
-            <Component
-                ref={ref}
-                id={id}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                required={required}
-                disabled={disabled}
-                hasError={hasError}
-            />
+            <Control>
+                <Label htmlFor={id}>{label} {required && (<Required>*</Required>)}</Label>
+                {error && (<Message>{error}</Message>)}
+                <Component
+                    ref={ref}
+                    id={id}
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                    required={required}
+                    disabled={disabled}
+                    hasError={error}
+                />
+            </Control>
         </>
     );
 });
@@ -96,7 +123,7 @@ Input.propTypes = {
     placeholder: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
-    hasError: PropTypes.bool,
+    error: PropTypes.string,
 };
 
 export default Input;

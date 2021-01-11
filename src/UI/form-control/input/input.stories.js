@@ -7,7 +7,12 @@ export const base = () => (
 );
 
 export const error = () => (
-    <Input hasError name="input" label="Input" value="Text value" />
+    <Input
+        name="input"
+        label="Input"
+        value="Text value"
+        error="This is some error message"
+    />
 );
 
 export const disabled = () => (

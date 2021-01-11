@@ -24,6 +24,10 @@ const Component = styled.button`
         --button-hover-background: var(--color-blue-darken-1);
         --button-outline-color: rgba(59,130,246,.5);
         --button-disabled-color: var(--color-white);
+    `) || (props.variant === 'transparent' && `
+        --background-background: transparent;
+        --button-hover-background: transparent;
+        --button-outline-color: transparent;
     `)}
     min-width: 48px;
     min-height: 48px;
@@ -41,7 +45,7 @@ const Component = styled.button`
     transition-property: background color box-shadow;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 
     ${props => (props.icon && `
         display: flex;
@@ -85,7 +89,6 @@ const Component = styled.button`
 const Link = styled.a`
     text-decoration: none;
 `;
-
 const Button = forwardRef(({
     type = 'button',
     disabled,
@@ -130,6 +133,7 @@ Button.propTypes = {
         'secondary',
         'red',
         'blue',
+        'transparent',
     ]),
     label: PropTypes.string,
     icon: PropTypes.oneOf([
@@ -139,6 +143,7 @@ Button.propTypes = {
         'trash',
         'edit',
         'star',
+        'check',
     ]),
     styles: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
