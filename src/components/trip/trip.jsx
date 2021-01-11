@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '../../UI/form-control/button';
+import remove from '../../api/trip/delete';
 
 const truncate = css`
     white-space: nowrap;
@@ -79,7 +80,6 @@ const Controls = styled.div`
     grid-area: controls;
     justify-content: flex-end;
 `;
-
 const Trip = ({data}) => {
     const {
         id,
@@ -91,6 +91,7 @@ const Trip = ({data}) => {
 
     const handleDelete = () => {
         console.log('Clicked delete');
+        remove(id);
     };
 
     return (

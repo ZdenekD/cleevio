@@ -10,7 +10,6 @@ const Component = styled.aside`
         color: var(--color-gray);
     }
 `;
-
 const Aside = ({children}) => (
     <Component>
         {children}

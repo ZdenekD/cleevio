@@ -32,7 +32,6 @@ const Component = styled.header`
         max-width: 160px;
     }
 `;
-
 const Header = ({title, subtitle}) => (
     <Component>
         <Link passHref href="/">

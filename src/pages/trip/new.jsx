@@ -7,7 +7,7 @@ import Form from '../../components/form/trip';
 
 const Page = () => (
     <Layout>
-        <Header title="Edit trip" subtitle="Trips" />
+        <Header title="New trip" subtitle="Trips" />
         <Nav />
         <Content>
             <Form />

@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
-import useSWR from 'swr';
+import useFetch from '../hooks/useFetch';
 import Layout from '../components/layout';
 import Header from '../components/layout/header';
 import Nav from '../components/nav';
 import Content from '../components/layout/content';
 import Aside from '../components/layout/aside';
 import Trip from '../components/trip';
-import fetcher from '../helpers/fetcher';
-import options from '../helpers/options';
+import Message from '../UI/message';
+import Loader from '../UI/loader';
+import fetcher from '../api/fetcher';
+import options from '../api/options';
 
 const Homepage = ({countries = []}) => {
-    const url = `${process.env.API}/trip`;
-    const {data, error} = useSWR(url, () => fetcher(url, options.get()));
+    const {data, error} = useFetch('trip');
     const items = data?.map(item => ({
         ...item,
         address: {
@@ -25,9 +26,9 @@ const Homepage = ({countries = []}) => {
             <Header title="Your trips" subtitle="Tips &amp; tricks" />
             <Nav />
             <Content>
-                {error && (<div>ERROR: {error}</div>)}
+                {error && (<Message isOpen variant="danger">{error}</Message>)}
 
-                {!items && (<div>Loading &hellip;</div>)}
+                {!items && (<Loader />)}
 
                 {items?.map(trip => (<Trip key={trip.id} data={trip} />))}
             </Content>

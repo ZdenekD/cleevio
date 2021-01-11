@@ -46,7 +46,7 @@ const Anchor = styled.a`
         fill: currentColor;
     }
 `;
-const Menu = () => {
+const Nav = () => {
     const router = useRouter();
 
     return (
@@ -84,4 +84,4 @@ const Menu = () => {
     );
 };
 
-export default Menu;
+export default Nav;

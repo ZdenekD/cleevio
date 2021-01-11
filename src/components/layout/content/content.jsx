@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Component = styled.section`
     padding: 0 2rem;
 `;
-
 const Content = ({children}) => (
     <Component>
         {children}
