@@ -11,7 +11,7 @@ const options = {
     post: body => ({
         method: 'POST',
         headers,
-        body: JSON.stringigy(body),
+        body: JSON.stringify(body),
     }),
     put: body => ({
         method: 'PUT',

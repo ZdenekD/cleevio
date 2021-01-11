@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 import useFetch from '../../../hooks/useFetch';
+import create from '../../../api/trip/create';
 import Form from '..';
 import Message from '../../../UI/message';
 import Fieldset from '../../../UI/form-control/fieldset';
@@ -33,6 +34,7 @@ const ToggleSection = styled.div`
 `;
 const TripForm = ({data}) => {
     const [countriesList, setCountriesList] = React.useState([]);
+    const [isSend, setSend] = React.useState(false);
     const [country, setCountry] = React.useState();
     const {data: countries, error} = useFetch(countriesList.length < 1 ? 'country' : null);
     const {register, errors, handleSubmit, watch, setValue} = useForm({mode: 'onBlur'});
@@ -40,7 +42,7 @@ const TripForm = ({data}) => {
     const handleCountryChange = value => {
         setCountry(value.label);
     };
-    const onSubmit = values => {
+    const onSubmit = async values => {
         const body = {
             start_date: values.start_date,
             end_date: values.end_date,
@@ -55,7 +57,9 @@ const TripForm = ({data}) => {
             covid_test_date: values.covid_test_date || '',
         };
 
-        console.log(JSON.stringify(body));
+        setSend(true);
+        await create(body);
+        setSend(false);
     };
 
     React.useEffect(() => {
@@ -88,6 +92,7 @@ const TripForm = ({data}) => {
                         data={countriesList}
                         defaultLabel="Select country ..."
                         variant='flags'
+                        disabled={isSend}
                         onChange={handleCountryChange}
                     />
                 </Fieldset>
@@ -103,6 +108,7 @@ const TripForm = ({data}) => {
                         name="start_date"
                         label="Start date"
                         type="date"
+                        disabled={isSend}
                         error={errors.start_date?.message}
                     />
                     <Input
@@ -116,6 +122,7 @@ const TripForm = ({data}) => {
                         name="end_date"
                         label="End data"
                         type="date"
+                        disabled={isSend}
                         error={errors.end_date?.message}
                     />
                 </Fieldset>
@@ -134,6 +141,7 @@ const TripForm = ({data}) => {
                         name="company_name"
                         label="Company name"
                         placeholder="Type here ..."
+                        disabled={isSend}
                         error={errors.company_name?.message}
                     />
                     <Input
@@ -155,6 +163,7 @@ const TripForm = ({data}) => {
                         name="city"
                         label="City"
                         placeholder="Type here ..."
+                        disabled={isSend}
                         error={errors.city?.message}
                     />
                     <Input
@@ -176,6 +185,7 @@ const TripForm = ({data}) => {
                         name="street"
                         label="Street"
                         placeholder="Type here ..."
+                        disabled={isSend}
                         error={errors.street?.message}
                     />
                     <Input
@@ -188,6 +198,7 @@ const TripForm = ({data}) => {
                         name="zip"
                         label="Zip code"
                         placeholder="Type here ..."
+                        disabled={isSend}
                         error={errors.zip?.message}
                     />
                 </Fieldset>
@@ -195,8 +206,8 @@ const TripForm = ({data}) => {
                     <Legend required>
                         Have you been recently tested for <strong>COVID-19</strong>?
                     </Legend>
-                    <Radio ref={register} required name="covid" label="Yes" />
-                    <Radio ref={register} required name="covid" label="No" />
+                    <Radio ref={register} required name="covid" label="Yes" disabled={isSend} />
+                    <Radio ref={register} required name="covid" label="No" disabled={isSend} />
 
                     {isOpen && (
                         <ToggleSection>
@@ -205,13 +216,14 @@ const TripForm = ({data}) => {
                                 name="covid_test_date"
                                 label="Date of receiving test results"
                                 type="date"
+                                disabled={isSend}
                                 error={errors.covid_test_date?.message}
                             />
                         </ToggleSection>
                     )}
                 </Fieldset>
                 <Submit>
-                    <Button type="submit" icon="check">Save</Button>
+                    <Button type="submit" icon={isSend ? 'loader' : 'check'} disabled={isSend}>Save</Button>
                 </Submit>
             </Form>
         </>
