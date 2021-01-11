@@ -1,7 +1,13 @@
 const colors = `
     :root {
+        --color-blue-lighten-3: #b1cefb;
+        --color-blue-lighten-2: #8ab5f9;
+        --color-blue-lighten-1: #639cf8;
         --color-blue: #3b82f6;
         --color-blue-darken-1: #156bf4;
+        --color-yellow-lighten-3: #fdf5d8;
+        --color-yellow-lighten-2: #fbebb1;
+        --color-yellow-lighten-1: #f9e18a;
         --color-yellow: #f8d964;
         --color-yellow-darken-1: #fec527;
         --color-red-lighten-5: #fbebe9;
