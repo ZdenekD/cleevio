@@ -90,7 +90,6 @@ const Trip = ({data}) => {
     } = data;
 
     const handleDelete = () => {
-        console.log('Clicked delete');
         remove(id);
     };
 

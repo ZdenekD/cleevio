@@ -16,6 +16,10 @@ const Component = styled.fieldset`
         transition: background 0.3s ease-in-out;
     }
 
+    &:first-of-type {
+        margin-top: 2rem;
+    }
+
     &:last-of-type {
         margin-bottom: 2rem;
     }
