@@ -9,9 +9,12 @@ jspm_packages
 # Build
 dist/
 build/
-public/
+public/*
 !public/robots.txt
 !public/sitemap.xml
+!public/favicon*
+!public/*.svg
+!public/**/*
 
 # Database
 /db
