@@ -5,6 +5,8 @@ const variables = `
         --transition-timing: var(--ease-out-quart);
         --border-radius: 10px;
         --button-min-width: 200px;
+        --zindex-overlay: 99;
+        --zindex-modal: 100;
     }
 `;
 

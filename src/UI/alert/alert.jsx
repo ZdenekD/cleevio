@@ -5,40 +5,42 @@ import Button from '../form-control/button';
 
 const Component = styled.div`
     ${props => (props.variant === 'info' && `
-        --message-background: var(--color-blue-lighten-3);
-        --message-color: var(--color-blue);
-        --message-border: var(--color-blue-lighten-2);
+        --alert-background: var(--color-blue-lighten-3);
+        --alert-color: var(--color-blue);
+        --alert-border: var(--color-blue-lighten-2);
     `) || (props.variant === 'warning' && `
-        --message-background: var(--color-yellow-lighten-3);
-        --message-color: var(--color-gray);
-        --message-border: var(--color-yellow-lighten-2);
+        --alert-background: var(--color-yellow-lighten-3);
+        --alert-color: var(--color-gray);
+        --alert-border: var(--color-yellow-lighten-2);
     `) || (props.variant === 'danger' && `
-        --message-background: var(--color-red-lighten-4);
-        --message-color: var(--color-red-darken-1);
-        --message-border: var(--color-red-lighten-3);
+        --alert-background: var(--color-red-lighten-4);
+        --alert-color: var(--color-red-darken-1);
+        --alert-border: var(--color-red-lighten-3);
     `)}
 
-    width: 100%;
+    min-width: 200px;
     max-width: 680px;
-    margin: 1rem auto;
     padding: 1rem 2rem 1rem 1rem;
-    position: relative;
-    background-color: var(--message-background, var(--color-gray-lighten-3));
-    color: var(--message-color, var(--color-gray));
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    z-index: var(--zindex-modal);
+    background-color: var(--alert-background, var(--color-gray-lighten-3));
+    color: var(--alert-color, var(--color-gray));
     border-radius: var(--border-radius);
-    border: 1px solid var(--message-border, var(--color-gray-lighten-2));
+    border: 1px solid var(--alert-border, var(--color-gray-lighten-2));
 `;
 const styles = `
     min-width: 2rem;
     min-height: 2rem;
     padding: 0;
     position: absolute;
-    top: .5rem;
+    top: 5px;
     right: 0;
     color: var(--color-gray);
     font-size: 2rem;
 `;
-const Message = ({
+const Alert = ({
     variant,
     children,
     isOpen = false,
@@ -60,7 +62,7 @@ const Message = ({
     );
 };
 
-Message.propTypes = {
+Alert.propTypes = {
     variant: PropTypes.oneOf([
         'info',
         'warning',
@@ -70,4 +72,4 @@ Message.propTypes = {
     isOpen: PropTypes.bool,
 };
 
-export default Message;
+export default Alert;
