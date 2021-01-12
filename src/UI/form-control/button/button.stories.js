@@ -16,10 +16,10 @@ export const base = () => (
             <Button variant="secondary">Secondary button</Button>
         </Row>
         <Row>
-            <Button variant="red">Red button</Button>
+            <Button variant="danger">Red button</Button>
         </Row>
         <Row>
-            <Button variant="blue">Blue button</Button>
+            <Button variant="info">Blue button</Button>
         </Row>
     </>
 );
@@ -32,10 +32,10 @@ export const disabled = () => (
             <Button disabled variant="secondary">Secondary button</Button>
         </Row>
         <Row>
-            <Button disabled variant="red">Red button</Button>
+            <Button disabled variant="danger">Red button</Button>
         </Row>
         <Row>
-            <Button disabled variant="blue">Blue button</Button>
+            <Button disabled variant="info">Blue button</Button>
         </Row>
     </>
 );

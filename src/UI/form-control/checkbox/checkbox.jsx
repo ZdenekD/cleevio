@@ -46,13 +46,13 @@ const Component = styled.input`
     &:disabled {
 
         + i {
-            background-color: var(--color-gray-lighten-4);
             pointer-events: none;
         }
     }
 `;
 const Label = styled.label`
     padding: 12px;
+    display: inline-flex;
     background-color: var(--color-gray-lighten-3);
     color: var(--color-gray);
     transition-property: color background-color;
@@ -81,6 +81,7 @@ const Label = styled.label`
 const Checkbox = forwardRef(({
     name,
     label,
+    checked,
     required,
     disabled,
 }, ref) => {
@@ -89,7 +90,7 @@ const Checkbox = forwardRef(({
     return (
         <>
             <Label htmlFor={id} disabled={disabled}>
-                <Component ref={ref} id={id} name={name} type="checkbox" disabled={disabled} required={required} className="_visuallyhidden" value={label} />
+                <Component ref={ref} id={id} name={name} type="checkbox" checked={checked} disabled={disabled} required={required} className="_visuallyhidden" value={label} />
                 <Icon type="check" />
                 {label}
             </Label>
@@ -102,6 +103,7 @@ Checkbox.displayName = 'Checkbox';
 Checkbox.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    checked: PropTypes.bool,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
 };

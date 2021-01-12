@@ -89,6 +89,7 @@ const Input = forwardRef(({
     label,
     type = 'text',
     placeholder,
+    value,
     required,
     disabled,
     error,
@@ -105,6 +106,7 @@ const Input = forwardRef(({
                     <Datepicker
                         name={name}
                         label={label}
+                        value={value}
                         required={required}
                         disabled={disabled}
                         onChange={onChange}
@@ -135,6 +137,7 @@ Input.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string,
     placeholder: PropTypes.string,
+    value: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.string,

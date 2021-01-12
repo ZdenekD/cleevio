@@ -72,6 +72,7 @@ const Select = forwardRef(({
     required,
     disabled,
     data,
+    value,
     variant = 'simple',
     onChange,
 }, ref) => {
@@ -87,6 +88,7 @@ const Select = forwardRef(({
             placeholder={defaultLabel}
             aria-label={label}
             options={data}
+            value={value}
             styles={styles}
             isDisabled={disabled}
             components={components}
@@ -104,6 +106,7 @@ Select.propTypes = {
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     data: PropTypes.array,
+    value: PropTypes.string,
     variant: PropTypes.oneOf(['simple', 'flags']),
     onChange: PropTypes.func,
 };

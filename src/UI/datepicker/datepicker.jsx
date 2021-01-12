@@ -8,6 +8,7 @@ import prefix from '../../helpers/prefix';
 const Datepicker = ({
     name,
     label,
+    value,
     required,
     disabled,
     onChange,
@@ -29,6 +30,7 @@ const Datepicker = ({
                 firstDayOfWeek={1}
                 keepFocus={false}
                 placeholder = 'dd. mm. yyyy'
+                value={value}
                 onDayChange={onChange}
             />
         </Component>
@@ -38,6 +40,7 @@ const Datepicker = ({
 Datepicker.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    value: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,

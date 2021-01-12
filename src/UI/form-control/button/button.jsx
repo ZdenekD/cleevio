@@ -14,12 +14,12 @@ const Component = styled.button`
         --button-color: var(--color-gray);
         --button-outline-color: rgba(249,249,250,.5);
         --button-icon-color: var(--color-gray);
-    `) || (props.variant === 'red' && `
+    `) || (props.variant === 'danger' && `
         --button-background: var(--color-red-lighten-5);
         --button-hover-background: var(--color-red-lighten-4);
         --button-outline-color: rgba(211, 57, 39, .5);
         --button-icon-color: var(--color-red);
-    `) || (props.variant === 'blue' && `
+    `) || (props.variant === 'info' && `
         --button-background: var(--color-blue);
         --button-hover-background: var(--color-blue-darken-1);
         --button-outline-color: rgba(59,130,246,.5);
@@ -131,8 +131,8 @@ Button.propTypes = {
     variant: PropTypes.oneOf([
         'primary',
         'secondary',
-        'red',
-        'blue',
+        'danger',
+        'info',
         'transparent',
     ]),
     label: PropTypes.string,

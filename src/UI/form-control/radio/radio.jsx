@@ -29,7 +29,6 @@ const Component = styled.input`
     }
 
     &:disabled {
-        background-color: var(--color-gray-lighten-4);
         pointer-events: none;
     }
 `;
@@ -64,6 +63,7 @@ const Label = styled.label`
 const Radio = forwardRef(({
     name,
     label,
+    checked,
     required,
     disabled,
 }, ref) => {
@@ -72,7 +72,7 @@ const Radio = forwardRef(({
     return (
         <>
             <Label htmlFor={id} disabled={disabled}>
-                <Component ref={ref} id={id} name={name} type="radio" disabled={disabled} required={required} value={label} />
+                <Component ref={ref} id={id} name={name} checked={checked} type="radio" disabled={disabled} required={required} value={label} />
                 {label}
             </Label>
         </>
@@ -84,6 +84,7 @@ Radio.displayName = 'Radio';
 Radio.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    checked: PropTypes.bool,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
 };
