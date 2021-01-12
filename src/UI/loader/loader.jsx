@@ -6,8 +6,8 @@ const Component = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 15vh;
+    position: absolute;
+    top: 10vh;
     left: 50%;
     transform: translateX(-50%);
     color: var(--color-gray);
