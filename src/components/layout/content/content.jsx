@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Component = styled.section`
     padding: 0 2rem;
+    position: relative;
 `;
 const Content = ({children}) => (
     <Component>

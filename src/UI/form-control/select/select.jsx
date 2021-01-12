@@ -1,7 +1,8 @@
+import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import {useId} from 'react-id-generator';
 import Component from 'react-select';
-import flagComponents from './flags';
+import flagComponents from './flagComponents';
 import prefix from '../../../helpers/prefix';
 
 const styles = {
@@ -11,6 +12,7 @@ const styles = {
         padding: '2px 1rem',
         lineHeight: '20px',
         boxShadow: 'none',
+        cursor: 'pointer',
         borderRadius: state.menuIsOpen ? 'var(--border-radius) var(--border-radius) 0 0' : 'var(--border-radius)',
         borderColor: 'var(--color-gray-lighten-3)',
 
@@ -55,6 +57,7 @@ const styles = {
         background: state.isSelected || state.isFocused ? 'var(--color-gray-lighten-4)' : 'var(--color-white)',
         color: 'var(--color-black)',
         transition: 'background 0.3s linear',
+        cursor: 'cell',
         borderTop: '1px solid var(--color-gray-lighten-3)',
 
         '&:hover': {transition: 'background 0.05s linear'},
@@ -62,20 +65,23 @@ const styles = {
         '&:first-of-type': {borderTop: 'none'},
     }),
 };
-const Select = ({
+const Select = forwardRef(({
     name,
     label,
     defaultLabel,
+    required,
     disabled,
     data,
     variant = 'simple',
     onChange,
-}) => {
+}, ref) => {
     const [id] = useId(1, prefix);
     const components = variant === 'flags' ? flagComponents : null;
 
     return (
         <Component
+            ref={ref}
+            required={required}
             id={id}
             name={name}
             placeholder={defaultLabel}
@@ -87,7 +93,7 @@ const Select = ({
             onChange={onChange}
         />
     );
-};
+});
 
 Select.displayName = 'Select';
 
@@ -95,6 +101,7 @@ Select.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     defaultLabel: PropTypes.string,
+    required: PropTypes.bool,
     disabled: PropTypes.bool,
     data: PropTypes.array,
     variant: PropTypes.oneOf(['simple', 'flags']),
