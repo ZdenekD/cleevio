@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Component = styled.aside`
     padding: 2rem 2rem 0;
+    position: relative;
     border-left: 1px solid var(--color-gray-lighten-4);
 
     p {
