@@ -118,11 +118,10 @@ const TripForm = ({data, variant = 'create'}) => {
                                 ref={register}
                                 required
                                 name="country"
-                                label="Choose a country"
                                 data={countriesList}
                                 defaultLabel="Select country ..."
                                 variant='flags'
-                                value={getCountryCode(data?.address.country)?.value}
+                                value={data && {value: getCountryCode(data?.address.country)?.value, label: data?.address.country}}
                                 disabled={isDisabled}
                                 onChange={value => prop.onChange(value.label)}
                             />

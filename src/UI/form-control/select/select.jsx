@@ -67,7 +67,6 @@ const styles = {
 };
 const Select = forwardRef(({
     name,
-    label,
     defaultLabel,
     required,
     disabled,
@@ -85,8 +84,9 @@ const Select = forwardRef(({
             required={required}
             id={id}
             name={name}
+            label={defaultLabel}
             placeholder={defaultLabel}
-            aria-label={label}
+            aria-label={defaultLabel}
             options={data}
             value={value}
             styles={styles}
@@ -101,12 +101,14 @@ Select.displayName = 'Select';
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
     defaultLabel: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     data: PropTypes.array,
-    value: PropTypes.string,
+    value: PropTypes.shape({
+        value: PropTypes.string,
+        label: PropTypes.string,
+    }),
     variant: PropTypes.oneOf(['simple', 'flags']),
     onChange: PropTypes.func,
 };
