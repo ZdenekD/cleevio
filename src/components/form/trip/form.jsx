@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useForm} from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
 import styled from 'styled-components';
 import useFetch from '../../../hooks/useFetch';
 import create from '../../../api/trip/create';
@@ -13,6 +13,7 @@ import Input from '../../../UI/form-control/input';
 import Radio from '../../../UI/form-control/radio';
 import Button from '../../../UI/form-control/button';
 import regex from '../../../helpers/regex';
+import formatDate from '../../../helpers/formatDate';
 
 const Submit = styled.div`
     width: 100%;
@@ -34,15 +35,13 @@ const ToggleSection = styled.div`
 `;
 const TripForm = ({data}) => {
     const [countriesList, setCountriesList] = React.useState([]);
-    const [isSend, setSend] = React.useState(false);
-    const [country, setCountry] = React.useState();
+    const [isDisabled, setDisabled] = React.useState(false);
     const {data: countries, error} = useFetch(countriesList.length < 1 ? 'country' : null);
-    const {register, errors, handleSubmit, watch, setValue} = useForm({mode: 'onBlur'});
+    const {register, errors, handleSubmit, watch, setValue, control} = useForm({mode: 'onBlur'});
     const isOpen = watch('covid') === 'Yes';
-    const handleCountryChange = value => {
-        setCountry(value.label);
-    };
     const onSubmit = async values => {
+        setDisabled(true);
+
         const body = {
             start_date: values.start_date,
             end_date: values.end_date,
@@ -50,16 +49,15 @@ const TripForm = ({data}) => {
             address: {
                 street: values.street || '',
                 city: values.city || '',
-                country: country || '',
+                country: values.country || '',
                 zip: values.zip || '',
             },
             covid: values.covid === 'Yes',
             covid_test_date: values.covid_test_date || '',
         };
 
-        setSend(true);
         await create(body);
-        setSend(false);
+        setDisabled(false);
     };
 
     React.useEffect(() => {
@@ -86,44 +84,78 @@ const TripForm = ({data}) => {
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Fieldset>
                     <Legend required>Where do you want to go?</Legend>
-                    <Select
+                    <Controller
                         name="country"
-                        label="Choose a country"
-                        data={countriesList}
-                        defaultLabel="Select country ..."
-                        variant='flags'
-                        disabled={isSend}
-                        onChange={handleCountryChange}
+                        control={control}
+                        defaultValue=""
+                        rules={{
+                            reguired: {
+                                value: true,
+                                message: 'Country is required field',
+                            },
+                        }}
+                        render={prop => (
+                            <Select
+                                ref={register}
+                                required
+                                name="country"
+                                label="Choose a country"
+                                data={countriesList}
+                                defaultLabel="Select country ..."
+                                variant='flags'
+                                disabled={isDisabled}
+                                onChange={value => prop.onChange(value.label)}
+                            />
+                        )}
                     />
+
                 </Fieldset>
                 <Fieldset>
-                    <Input
-                        ref={register({
-                            reguired: {
-                                value: true,
-                                message: 'Start date is required field',
-                            },
-                        })}
-                        required
+                    <Controller
                         name="start_date"
-                        label="Start date"
-                        type="date"
-                        disabled={isSend}
-                        error={errors.start_date?.message}
-                    />
-                    <Input
-                        ref={register({
+                        control={control}
+                        defaultValue=""
+                        rules={{
                             reguired: {
                                 value: true,
-                                message: 'End date is required field',
+                                message: 'Date is required field',
                             },
-                        })}
-                        required
+                        }}
+                        render={prop => (
+                            <Input
+                                ref={register}
+                                required
+                                name={prop.name}
+                                label="Start date"
+                                type="date"
+                                disabled={isDisabled}
+                                error={errors.start_date?.message}
+                                onChange={value => prop.onChange(formatDate(value))}
+                            />
+                        )}
+                    />
+                    <Controller
                         name="end_date"
-                        label="End data"
-                        type="date"
-                        disabled={isSend}
-                        error={errors.end_date?.message}
+                        control={control}
+                        defaultValue=""
+                        rules={{
+                            reguired: {
+                                value: true,
+                                message: 'Date is required field',
+                            },
+                        }}
+                        render={prop => (
+                            <Input
+                                ref={register}
+                                required
+                                name={prop.name}
+                                label="End date"
+                                type="date"
+                                disabled={isDisabled}
+                                error={errors.end_date?.message}
+                                onChange={value => prop.onChange(formatDate(value))}
+                            />
+                        )}
                     />
                 </Fieldset>
                 <Fieldset>
@@ -141,7 +173,7 @@ const TripForm = ({data}) => {
                         name="company_name"
                         label="Company name"
                         placeholder="Type here ..."
-                        disabled={isSend}
+                        disabled={isDisabled}
                         error={errors.company_name?.message}
                     />
                     <Input
@@ -163,7 +195,7 @@ const TripForm = ({data}) => {
                         name="city"
                         label="City"
                         placeholder="Type here ..."
-                        disabled={isSend}
+                        disabled={isDisabled}
                         error={errors.city?.message}
                     />
                     <Input
@@ -185,7 +217,7 @@ const TripForm = ({data}) => {
                         name="street"
                         label="Street"
                         placeholder="Type here ..."
-                        disabled={isSend}
+                        disabled={isDisabled}
                         error={errors.street?.message}
                     />
                     <Input
@@ -198,7 +230,7 @@ const TripForm = ({data}) => {
                         name="zip"
                         label="Zip code"
                         placeholder="Type here ..."
-                        disabled={isSend}
+                        disabled={isDisabled}
                         error={errors.zip?.message}
                     />
                 </Fieldset>
@@ -206,24 +238,39 @@ const TripForm = ({data}) => {
                     <Legend required>
                         Have you been recently tested for <strong>COVID-19</strong>?
                     </Legend>
-                    <Radio ref={register} required name="covid" label="Yes" disabled={isSend} />
-                    <Radio ref={register} required name="covid" label="No" disabled={isSend} />
+                    <Radio ref={register} required name="covid" label="Yes" disabled={isDisabled} />
+                    <Radio ref={register} required name="covid" label="No" disabled={isDisabled} />
 
                     {isOpen && (
                         <ToggleSection>
-                            <Input
-                                ref={register}
+                            <Controller
                                 name="covid_test_date"
-                                label="Date of receiving test results"
-                                type="date"
-                                disabled={isSend}
-                                error={errors.covid_test_date?.message}
+                                control={control}
+                                defaultValue=""
+                                rules={{
+                                    reguired: {
+                                        value: true,
+                                        message: 'Date is required field',
+                                    },
+                                }}
+                                render={prop => (
+                                    <Input
+                                        ref={register}
+                                        required
+                                        name={prop.name}
+                                        label="Date of receiving test results"
+                                        type="date"
+                                        disabled={isDisabled}
+                                        error={errors.covid_test_date?.message}
+                                        onChange={value => prop.onChange(formatDate(value))}
+                                    />
+                                )}
                             />
                         </ToggleSection>
                     )}
                 </Fieldset>
                 <Submit>
-                    <Button type="submit" icon={isSend ? 'loader' : 'check'} disabled={isSend}>Save</Button>
+                    <Button type="submit" icon={isDisabled ? 'loader' : 'check'} disabled={isDisabled}>Save</Button>
                 </Submit>
             </Form>
         </>

@@ -2,6 +2,7 @@ import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useId} from 'react-id-generator';
+import Datepicker from '../../datepicker';
 import prefix from '../../../helpers/prefix';
 
 const Control = styled.div`
@@ -91,6 +92,7 @@ const Input = forwardRef(({
     required,
     disabled,
     error,
+    onChange,
 }, ref) => {
     const [id] = useId(1, prefix);
 
@@ -99,16 +101,28 @@ const Input = forwardRef(({
             <Control>
                 <Label htmlFor={id}>{label} {required && (<Required>*</Required>)}</Label>
                 {error && (<Message>{error}</Message>)}
-                <Component
-                    ref={ref}
-                    id={id}
-                    name={name}
-                    type={type}
-                    placeholder={placeholder}
-                    required={required}
-                    disabled={disabled}
-                    hasError={error}
-                />
+                {type === 'date' && (
+                    <Datepicker
+                        name={name}
+                        label={label}
+                        required={required}
+                        disabled={disabled}
+                        onChange={onChange}
+                    />
+                )}
+
+                {type !== 'date' && (
+                    <Component
+                        ref={ref}
+                        id={id}
+                        name={name}
+                        type={type}
+                        placeholder={placeholder}
+                        required={required}
+                        disabled={disabled}
+                        hasError={error}
+                    />
+                )}
             </Control>
         </>
     );
@@ -124,6 +138,7 @@ Input.propTypes = {
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
 export default Input;
