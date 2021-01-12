@@ -6,7 +6,7 @@ import Nav from '../../../components/nav';
 import Content from '../../../components/layout/content';
 import Aside from '../../../components/layout/aside';
 import Form from '../../../components/form/trip';
-import Message from '../../../UI/message';
+import Alert from '../../../UI/alert';
 
 const Page = () => {
     const {query} = useRouter();
@@ -17,8 +17,8 @@ const Page = () => {
             <Header title="View trip" subtitle="Trips" />
             <Nav />
             <Content>
-                {error && (<Message isOpen variant="danger">{error}</Message>)}
-                <Form data={data} />
+                {error && (<Alert isOpen variant="danger">{error}</Alert>)}
+                <Form data={data} variant="view" />
             </Content>
             <Aside />
         </Layout>

@@ -6,7 +6,7 @@ import Logo from '../../../assets/images/logo.svg';
 const Component = styled.header`
     display: grid;
     grid-area: header;
-    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 3fr);
+    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 2fr);
     grid-template-areas: "logo title subtitle";
 
     > a {

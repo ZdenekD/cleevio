@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useRouter} from 'next/router';
 import {useForm, Controller} from 'react-hook-form';
 import styled from 'styled-components';
 import useFetch from '../../../hooks/useFetch';
 import create from '../../../api/trip/create';
-import Form from '..';
-import Message from '../../../UI/message';
+import update from '../../../api/trip/update';
+import Form from '../../../UI/form-control/form';
+import Alert from '../../../UI/alert';
 import Fieldset from '../../../UI/form-control/fieldset';
 import Legend from '../../../UI/form-control/legend';
 import Select from '../../../UI/form-control/select';
@@ -17,7 +19,7 @@ import formatDate from '../../../helpers/formatDate';
 
 const Submit = styled.div`
     width: 100%;
-    margin-top: auto;
+    margin-top: 2rem;
     padding: 1rem 0 3rem;
     display: flex;
     justify-content: center;
@@ -33,12 +35,15 @@ const ToggleSection = styled.div`
     padding-top: 1rem;
     border-top: 1px solid var(--color-gray-lighten-3);
 `;
-const TripForm = ({data}) => {
+const TripForm = ({data, variant = 'create'}) => {
     const [countriesList, setCountriesList] = React.useState([]);
     const [isDisabled, setDisabled] = React.useState(false);
     const {data: countries, error} = useFetch(countriesList.length < 1 ? 'country' : null);
-    const {register, errors, handleSubmit, watch, setValue, control} = useForm({mode: 'onBlur'});
+    const router = useRouter();
+    const {query} = useRouter();
+    const {register, errors, control, handleSubmit, watch, setValue} = useForm({mode: 'onBlur'});
     const isOpen = watch('covid') === 'Yes';
+    const getCountryCode = value => countriesList.find(country => country.label === value);
     const onSubmit = async values => {
         setDisabled(true);
 
@@ -56,8 +61,15 @@ const TripForm = ({data}) => {
             covid_test_date: values.covid_test_date || '',
         };
 
-        await create(body);
-        setDisabled(false);
+        if (variant === 'create') {
+            await create(body);
+        }
+
+        if (variant === 'update') {
+            await update(query.id, body);
+        }
+
+        router.push('/');
     };
 
     React.useEffect(() => {
@@ -65,9 +77,12 @@ const TripForm = ({data}) => {
             setValue('start_date', data.start_date);
             setValue('end_date', data.end_date);
             setValue('company_name', data.company_name);
+            setValue('country', data.address.country);
             setValue('city', data.address.city);
             setValue('street', data.address.street);
             setValue('zip', data.address.zip);
+            setValue('covid', data.covid ? 'Yes' : 'No');
+            setValue('covid_test_date', data.covid_test_date);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
@@ -78,9 +93,13 @@ const TripForm = ({data}) => {
         }
     }, [countries]);
 
+    React.useEffect(() => {
+        setDisabled(variant === 'view');
+    }, [variant]);
+
     return (
         <>
-            {error && (<Message isOpen variant="danger">{error}</Message>)}
+            {error && (<Alert isOpen variant="danger">{error}</Alert>)}
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Fieldset>
                     <Legend required>Where do you want to go?</Legend>
@@ -103,6 +122,7 @@ const TripForm = ({data}) => {
                                 data={countriesList}
                                 defaultLabel="Select country ..."
                                 variant='flags'
+                                value={getCountryCode(data?.address.country)?.value}
                                 disabled={isDisabled}
                                 onChange={value => prop.onChange(value.label)}
                             />
@@ -128,6 +148,7 @@ const TripForm = ({data}) => {
                                 name={prop.name}
                                 label="Start date"
                                 type="date"
+                                value={data?.start_date}
                                 disabled={isDisabled}
                                 error={errors.start_date?.message}
                                 onChange={value => prop.onChange(formatDate(value))}
@@ -151,6 +172,7 @@ const TripForm = ({data}) => {
                                 name={prop.name}
                                 label="End date"
                                 type="date"
+                                value={data?.end_date}
                                 disabled={isDisabled}
                                 error={errors.end_date?.message}
                                 onChange={value => prop.onChange(formatDate(value))}
@@ -205,7 +227,7 @@ const TripForm = ({data}) => {
                                 message: 'Street is required field',
                             },
                             minLength: {
-                                value: 5,
+                                value: 3,
                                 message: 'Minimum length of the value is 5',
                             },
                             pattern: {
@@ -260,6 +282,7 @@ const TripForm = ({data}) => {
                                         name={prop.name}
                                         label="Date of receiving test results"
                                         type="date"
+                                        value={data?.covid_test_date}
                                         disabled={isDisabled}
                                         error={errors.covid_test_date?.message}
                                         onChange={value => prop.onChange(formatDate(value))}
@@ -269,14 +292,23 @@ const TripForm = ({data}) => {
                         </ToggleSection>
                     )}
                 </Fieldset>
-                <Submit>
-                    <Button type="submit" icon={isDisabled ? 'loader' : 'check'} disabled={isDisabled}>Save</Button>
-                </Submit>
+                {variant !== 'view' && (
+                    <Submit>
+                        <Button type="submit" icon={isDisabled ? 'loader' : 'check'} disabled={isDisabled}>Save</Button>
+                    </Submit>
+                )}
             </Form>
         </>
     );
 };
 
-TripForm.propTypes = {data: PropTypes.object};
+TripForm.propTypes = {
+    data: PropTypes.object,
+    variant: PropTypes.oneOf([
+        'create',
+        'update',
+        'view',
+    ]),
+};
 
 export default TripForm;

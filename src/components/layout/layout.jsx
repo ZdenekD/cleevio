@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Component = styled.main`
     min-height: 100vh;
     display: grid;
-    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 3fr);
+    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 2fr);
     grid-template-rows: minmax(90px, max-content) auto;
     grid-template-areas:
         "header header header"

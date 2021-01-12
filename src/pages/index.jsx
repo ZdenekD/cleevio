@@ -6,7 +6,7 @@ import Nav from '../components/nav';
 import Content from '../components/layout/content';
 import Aside from '../components/layout/aside';
 import Trip from '../components/trip';
-import Message from '../UI/message';
+import Alert from '../UI/alert';
 import Loader from '../UI/loader';
 import fetcher from '../api/fetcher';
 import options from '../api/options';
@@ -23,11 +23,10 @@ const Homepage = ({countries = []}) => {
 
     return (
         <Layout>
+            {error && (<Alert isOpen variant="danger">{error}</Alert>)}
             <Header title="Your trips" subtitle="Tips &amp; tricks" />
             <Nav />
             <Content>
-                {error && (<Message isOpen variant="danger">{error}</Message>)}
-
                 {!items && (<Loader />)}
 
                 {items?.map(trip => (<Trip key={trip.id} data={trip} />))}
