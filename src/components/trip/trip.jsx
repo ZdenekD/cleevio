@@ -166,7 +166,7 @@ const Trip = ({data, variant = 'list', target}) => {
                 </Date>
                 <Controls variant={variant}>
                     {variant === 'list' && (
-                        <Button variant='danger' icon='trash' onClick={handleConfirm} />
+                        <Button variant='danger' icon='trash' title="Delete this trip" onClick={handleConfirm} />
                     )}
 
                     {(!target || target === 'edit') && (
@@ -174,7 +174,7 @@ const Trip = ({data, variant = 'list', target}) => {
                             pathname: '/trip/edit/[id]',
                             query: {id},
                         }}>
-                            <Button asLink href='/trip/edit' variant='secondary' icon='edit'>
+                            <Button asLink href='/trip/edit' variant='secondary' icon='edit' title="Edit trip">
                                 {variant === 'grid' ? ('Edit trip') : ''}
                             </Button>
                         </Link>
@@ -185,7 +185,7 @@ const Trip = ({data, variant = 'list', target}) => {
                             pathname: '/trip/view/[id]',
                             query: {id},
                         }}>
-                            <Button asLink href='/trip/view' variant='secondary' icon='arrow'>
+                            <Button asLink href='/trip/view' variant='secondary' icon='arrow' title="View trip">
                                 {variant === 'grid' ? ('View trip') : ''}
                             </Button>
                         </Link>

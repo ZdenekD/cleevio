@@ -93,7 +93,7 @@ const Button = forwardRef(({
     type = 'button',
     disabled,
     variant = 'primary',
-    label,
+    title,
     icon,
     styles,
     href,
@@ -108,7 +108,7 @@ const Button = forwardRef(({
         variant={variant}
         icon={icon}
         styles={styles}
-        aria-label={label}
+        aria-label={title}
         href={href}
         as={asLink && Link}
         onClick={onClick}
@@ -135,7 +135,7 @@ Button.propTypes = {
         'info',
         'transparent',
     ]),
-    label: PropTypes.string,
+    title: PropTypes.string,
     icon: PropTypes.oneOf([
         'plus',
         'arrow',

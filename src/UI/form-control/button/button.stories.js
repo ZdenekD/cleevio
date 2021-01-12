@@ -51,10 +51,10 @@ export const icons = () => (
             <Button icon="loader">Loading button</Button>
         </Row>
         <Row>
-            <Button icon="trash" />
+            <Button icon="trash" title="Delete item" />
         </Row>
         <Row>
-            <Button icon="star" />
+            <Button icon="star" title="Star item" />
         </Row>
         <Row>
             <Button icon="edit">Edit button with little longer description</Button>
