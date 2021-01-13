@@ -42,7 +42,7 @@ const Component = styled.button`
     font-weight: 600;
     text-align: left;
     cursor: pointer;
-    transition-property: background color box-shadow;
+    transition-property: background-color, box-shadow;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
     border-radius: var(--border-radius);

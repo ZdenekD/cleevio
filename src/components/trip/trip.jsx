@@ -162,6 +162,7 @@ const Trip = ({data, variant = 'list', target}) => {
                     </Buttons>
                 </Confirm>
             )}
+
             <Component outdated={outdated} variant={variant}>
                 <Flag variant={variant}>
                     {address.country_code ? (
@@ -177,6 +178,7 @@ const Trip = ({data, variant = 'list', target}) => {
                     )}
                     {startDate} - {endDate}
                 </Date>
+
                 {!outdated && (
                     <Controls variant={variant}>
                         {variant === 'list' && (
@@ -207,12 +209,15 @@ const Trip = ({data, variant = 'list', target}) => {
                     </Controls>
                 )}
 
-                <Company variant={variant}>
-                    {variant === 'grid' && (
-                        <Label>Company</Label>
-                    )}
-                    {companyName}
-                </Company>
+                {companyName && (
+                    <Company variant={variant}>
+                        {variant === 'grid' && (
+                            <Label>Company</Label>
+                        )}
+                        {companyName}
+                    </Company>
+                )}
+
                 <Address>{address?.city} | {address?.street}, {address?.zip}</Address>
             </Component>
         </>
