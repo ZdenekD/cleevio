@@ -133,7 +133,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                     label: data?.address.country,
                                 }}
                                 disabled={isDisabled}
-                                onChange={value => prop.onChange(value.label)}
+                                onChange={value => value && prop.onChange(value.label)}
                             />
                         )}
                     />
@@ -160,7 +160,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 value={data?.start_date}
                                 disabled={isDisabled}
                                 error={errors.start_date?.message}
-                                onChange={value => prop.onChange(formatDate(value))}
+                                onChange={value => value && prop.onChange(formatDate(value))}
                             />
                         )}
                     />
@@ -294,7 +294,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                         value={data?.covid_test_date}
                                         disabled={isDisabled}
                                         error={errors.covid_test_date?.message}
-                                        onChange={value => prop.onChange(formatDate(value))}
+                                        onChange={value => value && prop.onChange(formatDate(value))}
                                     />
                                 )}
                             />
