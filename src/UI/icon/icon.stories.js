@@ -24,6 +24,9 @@ export const base = () => (
                 <Icon type="plus" styles={styles} />
             </Row>
             <Row>
+                <Icon type="cross" styles={styles} />
+            </Row>
+            <Row>
                 <Icon type="arrow" styles={styles} />
             </Row>
             <Row>
@@ -37,6 +40,9 @@ export const base = () => (
             </Row>
             <Row>
                 <Icon type="check" styles={styles} />
+            </Row>
+            <Row>
+                <Icon type="hamburger" styles={'width: 32px; height: 16px;'} />
             </Row>
         </Wrapper>
     </>

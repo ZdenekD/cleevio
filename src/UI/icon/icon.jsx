@@ -30,7 +30,31 @@ const getIcons = ({type}) => {
                 height: 100%;
                 top: 0;
                 transform: translateX(-50%);
+            }
+        `,
+        cross: css`
+            transform: rotate(45deg);
 
+            &::before,
+            &::after {
+                position: absolute;
+                left: 50%;
+                content: '';
+                background-color: currentColor;
+            }
+
+            &::before {
+                width: 100%;
+                height: 2px;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &::after {
+                width: 2px;
+                height: 100%;
+                top: 0;
+                transform: translateX(-50%);
             }
         `,
         loader: css`
@@ -39,6 +63,21 @@ const getIcons = ({type}) => {
             border-width: 1px 1px 0;
             border-style: solid;
             border-color: currentColor;
+        `,
+        hamburger: css`
+            border-top: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+
+            &::before {
+                width: 100%;
+                height: 2px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                content: '';
+                background-color: currentColor;
+            }
         `,
     };
 
@@ -79,12 +118,14 @@ const Icon = ({type, styles = defaultStyles}) => (
 Icon.propTypes = {
     type: PropTypes.oneOf([
         'plus',
+        'cross',
         'arrow',
         'loader',
         'trash',
         'edit',
         'check',
         'star',
+        'hamburger',
     ]),
     styles: PropTypes.string,
 };
