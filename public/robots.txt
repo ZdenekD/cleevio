@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+Sitemap: https://project-production.url/sitemap.xml
