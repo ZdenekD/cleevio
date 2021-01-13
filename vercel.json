@@ -1,11 +1,5 @@
 {
   "name": "Cleevio",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
