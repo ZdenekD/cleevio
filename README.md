@@ -8,6 +8,8 @@
 
 Instruction of the minimal setup
 
+-   minimal version of `node`: 12
+
 ---
 
 ### Setting up Dev
@@ -24,8 +26,8 @@ yarn
 
 Environment settings
 
-API - Api endpoint
-TOKEN - Bearer token for using API
+-   API - Api endpoint
+-   TOKEN - Bearer token for using API
 
 ### Development
 
