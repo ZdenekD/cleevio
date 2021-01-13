@@ -135,6 +135,7 @@ const Buttons = styled.div`
 `;
 const Trip = ({data, variant = 'list', target}) => {
     const [isConfirm, setConfirm] = React.useState(false);
+    const [isRemoved, setRemoved] = React.useState(false);
     const {
         id,
         address,
@@ -150,6 +151,7 @@ const Trip = ({data, variant = 'list', target}) => {
     const handleRemove = async () => {
         await remove(id);
         setConfirm(false);
+        setRemoved(true);
     };
 
     return (
@@ -163,63 +165,65 @@ const Trip = ({data, variant = 'list', target}) => {
                 </Confirm>
             )}
 
-            <Component outdated={outdated} variant={variant}>
-                <Flag variant={variant}>
-                    {address.country_code ? (
-                        <Image src={`/flags/${address.country_code}.svg`} alt={`${address.country} flag`} width="48" height="48" />
-                    ) : (
-                        <Image src="/placeholder.svg" alt={`${address.country} flag placeholder`} width="48" height="48" />
-                    )}
-                </Flag>
-                <Country variant={variant}><strong>{address?.country}</strong></Country>
-                <Date>
-                    {variant === 'grid' && (
-                        <Label>Date</Label>
-                    )}
-                    {startDate} - {endDate}
-                </Date>
-
-                {!outdated && (
-                    <Controls variant={variant}>
-                        {variant === 'list' && (
-                            <Button variant='danger' icon='trash' title="Delete this trip" onClick={handleConfirm} />
+            {!isRemoved && (
+                <Component outdated={outdated} variant={variant}>
+                    <Flag variant={variant}>
+                        {address.country_code ? (
+                            <Image src={`/flags/${address.country_code}.svg`} alt={`${address.country} flag`} width="48" height="48" />
+                        ) : (
+                            <Image src="/placeholder.svg" alt={`${address.country} flag placeholder`} width="48" height="48" />
                         )}
-
-                        {(!target || target === 'edit') && (
-                            <Link href={{
-                                pathname: '/trip/edit/[id]',
-                                query: {id},
-                            }}>
-                                <Button asLink href='/trip/edit' variant='secondary' icon='edit' title="Edit trip">
-                                    {variant === 'grid' ? ('Edit trip') : ''}
-                                </Button>
-                            </Link>
-                        )}
-
-                        {(!target || target === 'view') && (
-                            <Link href={{
-                                pathname: '/trip/view/[id]',
-                                query: {id},
-                            }}>
-                                <Button asLink href='/trip/view' variant='secondary' icon='arrow' title="View trip">
-                                    {variant === 'grid' ? ('View trip') : ''}
-                                </Button>
-                            </Link>
-                        )}
-                    </Controls>
-                )}
-
-                {companyName && (
-                    <Company variant={variant}>
+                    </Flag>
+                    <Country variant={variant}><strong>{address?.country}</strong></Country>
+                    <Date>
                         {variant === 'grid' && (
-                            <Label>Company</Label>
+                            <Label>Date</Label>
                         )}
-                        {companyName}
-                    </Company>
-                )}
+                        {startDate} - {endDate}
+                    </Date>
 
-                <Address>{address?.city} | {address?.street}, {address?.zip}</Address>
-            </Component>
+                    {!outdated && (
+                        <Controls variant={variant}>
+                            {variant === 'list' && (
+                                <Button variant='danger' icon='trash' title="Delete this trip" onClick={handleConfirm} />
+                            )}
+
+                            {(!target || target === 'edit') && (
+                                <Link href={{
+                                    pathname: '/trip/edit/[id]',
+                                    query: {id},
+                                }}>
+                                    <Button asLink href='/trip/edit' variant='secondary' icon='edit' title="Edit trip">
+                                        {variant === 'grid' ? ('Edit trip') : ''}
+                                    </Button>
+                                </Link>
+                            )}
+
+                            {(!target || target === 'view') && (
+                                <Link href={{
+                                    pathname: '/trip/view/[id]',
+                                    query: {id},
+                                }}>
+                                    <Button asLink href='/trip/view' variant='secondary' icon='arrow' title="View trip">
+                                        {variant === 'grid' ? ('View trip') : ''}
+                                    </Button>
+                                </Link>
+                            )}
+                        </Controls>
+                    )}
+
+                    {companyName && (
+                        <Company variant={variant}>
+                            {variant === 'grid' && (
+                                <Label>Company</Label>
+                            )}
+                            {companyName}
+                        </Company>
+                    )}
+
+                    <Address>{address?.city} | {address?.street}, {address?.zip}</Address>
+                </Component>
+            )}
         </>
     );
 };
