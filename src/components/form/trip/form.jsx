@@ -55,8 +55,8 @@ const TripForm = ({data, variant = 'create'}) => {
         setDisabled(true);
 
         const body = {
-            start_date: formatDate(values.start_date),
-            end_date: formatDate(values.end_date),
+            start_date: values.start_date,
+            end_date: values.end_date,
             company_name: values.company_name || '',
             address: {
                 street: values.street || '',
@@ -65,7 +65,7 @@ const TripForm = ({data, variant = 'create'}) => {
                 zip: values.zip || '',
             },
             covid: values.covid === 'Yes',
-            covid_test_date: values.covid_test_date ? formatDate(values.covid_test_date) : '',
+            covid_test_date: values.covid_test_date || '',
         };
 
         if (variant === 'create') {
@@ -160,7 +160,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 value={data?.start_date}
                                 disabled={isDisabled}
                                 error={errors.start_date?.message}
-                                onChange={value => prop.onChange(value)}
+                                onChange={value => prop.onChange(formatDate(value))}
                             />
                         )}
                     />
@@ -184,7 +184,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 value={data?.end_date}
                                 disabled={isDisabled}
                                 error={errors.end_date?.message}
-                                onChange={value => prop.onChange(value)}
+                                onChange={value => prop.onChange(formatDate(value))}
                             />
                         )}
                     />
@@ -294,7 +294,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                         value={data?.covid_test_date}
                                         disabled={isDisabled}
                                         error={errors.covid_test_date?.message}
-                                        onChange={value => prop.onChange(value)}
+                                        onChange={value => prop.onChange(formatDate(value))}
                                     />
                                 )}
                             />
