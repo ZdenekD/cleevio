@@ -18,7 +18,7 @@ const styles = `
 `;
 const Loader = () => (
     <Component>
-        <Icon type="loader" styles={styles} />
+        <Icon variant="loader" styles={styles} />
     </Component>
 );
 

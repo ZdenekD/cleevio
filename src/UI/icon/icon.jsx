@@ -7,7 +7,7 @@ import Star from '../../assets/images/icons/star.svg';
 import Trash from '../../assets/images/icons/trash.svg';
 import {rotate} from '../../helpers/keyframes';
 
-const getIcons = ({type}) => {
+const getIcons = ({variant}) => {
     const styles = {
         plus: css`
             &::before,
@@ -81,7 +81,7 @@ const getIcons = ({type}) => {
         `,
     };
 
-    return styles[type];
+    return styles[variant];
 };
 
 const Component = styled.i`
@@ -105,18 +105,18 @@ const defaultStyles = `
     height: 16px;
 `;
 
-const Icon = ({type, styles = defaultStyles}) => (
-    <Component type={type} styles={styles}>
-        {type === 'arrow' && <Arrow />}
-        {type === 'trash' && <Trash />}
-        {type === 'edit' && <Edit />}
-        {type === 'check' && <Check />}
-        {type === 'star' && <Star />}
+const Icon = ({variant, styles = defaultStyles}) => (
+    <Component variant={variant} styles={styles}>
+        {variant === 'arrow' && <Arrow />}
+        {variant === 'trash' && <Trash />}
+        {variant === 'edit' && <Edit />}
+        {variant === 'check' && <Check />}
+        {variant === 'star' && <Star />}
     </Component>
 );
 
 Icon.propTypes = {
-    type: PropTypes.oneOf([
+    variant: PropTypes.oneOf([
         'plus',
         'cross',
         'arrow',

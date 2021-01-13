@@ -91,7 +91,7 @@ const Checkbox = forwardRef(({
         <>
             <Label htmlFor={id} disabled={disabled}>
                 <Component ref={ref} id={id} name={name} type="checkbox" checked={checked} disabled={disabled} required={required} className="_visuallyhidden" value={label} />
-                <Icon type="check" />
+                <Icon variant="check" />
                 {label}
             </Label>
         </>

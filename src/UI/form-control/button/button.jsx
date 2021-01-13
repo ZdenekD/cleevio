@@ -118,7 +118,7 @@ const Button = forwardRef(({
         )}
 
         {icon && (
-            <Icon type={icon} />
+            <Icon variant={icon} />
         )}
     </Component>
 ));
