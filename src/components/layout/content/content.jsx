@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Component = styled.section`
     padding: 0 2rem;
+    grid-area: content;
     position: relative;
 `;
 const Content = ({children}) => (

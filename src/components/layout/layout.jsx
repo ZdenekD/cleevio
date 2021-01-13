@@ -6,10 +6,19 @@ const Component = styled.main`
     min-height: 100vh;
     display: grid;
     grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 2fr);
-    grid-template-rows: minmax(90px, max-content) auto;
-    grid-template-areas:
-        "header header header"
-        "nav content aside";
+    grid-template-rows: var(--header-height) auto auto;
+
+    @media (min-width: 600px) {
+        grid-template-areas:
+            "header header header"
+            "nav content content";
+    }
+
+    @media (min-width: 1200px) {
+        grid-template-areas:
+            "header header header"
+            "nav content aside";
+    }
 `;
 
 const App = ({children}) => (

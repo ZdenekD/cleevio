@@ -25,7 +25,7 @@ yarn
 Environment settings
 
 API - Api endpoint
-TOKEN - Bearer token to using API
+TOKEN - Bearer token for using API
 
 ### Development
 

@@ -7,6 +7,7 @@ const variables = `
         --button-min-width: 200px;
         --zindex-overlay: 99;
         --zindex-modal: 100;
+        --header-height: 90px;
     }
 `;
 

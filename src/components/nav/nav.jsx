@@ -7,6 +7,7 @@ import IconEdit from '../../assets/images/icons/edit-document.svg';
 import IconGlobe from '../../assets/images/icons/globe.svg';
 
 const Component = styled.nav`
+    min-height: calc(100vh - var(--header-height));
     padding: 2rem 2rem 0;
     background: var(--color-gray-lighten-5);
     font-weight: 600;
@@ -25,6 +26,7 @@ const Component = styled.nav`
 const Anchor = styled.a`
     display: flex;
     align-items: center;
+    grid-area: nav;
     text-decoration: none;
     transition-property: color border-color;
     transition-duration: var(--transition-duration-out);

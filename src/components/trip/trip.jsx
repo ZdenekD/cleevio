@@ -27,8 +27,10 @@ const pipeline = css`
     }
 `;
 const Component = styled.article`
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(24px, 48px) minmax(min-content, 1fr) 7fr minmax(min-content, 4fr);
+    grid-template-columns: minmax(24px, 48px) minmax(100px, 2fr) 7fr minmax(min-content, 4fr);
     grid-template-areas:
         "flag country date controls"
         "flag company address controls";
@@ -47,6 +49,8 @@ const Component = styled.article`
     `)}
 
     ${props => (props.variant === 'grid' && `
+        width: 100%;
+        max-width: 45vw;
         margin-bottom: 1rem;
         padding: .75rem;
         grid-template-columns: 32px auto;

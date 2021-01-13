@@ -7,7 +7,22 @@ const Component = styled.header`
     display: grid;
     grid-area: header;
     grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 2fr);
-    grid-template-areas: "logo title subtitle";
+
+    @media (min-width: 600px) {
+        grid-template-areas: "logo title title";
+
+        h2 {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        grid-template-areas: "logo title subtitle";
+
+        h2 {
+            display: block;
+        }
+    }
 
     > a {
         padding: 2rem 2rem 0;
