@@ -10,16 +10,23 @@ import Alert from '../UI/alert';
 import Loader from '../UI/loader';
 import fetcher from '../api/fetcher';
 import options from '../api/options';
+import useWindowSize from '../hooks/useWindowSize';
+import sortByOutdated from '../helpers/sort';
 
 const Homepage = ({countries = []}) => {
+    const {width} = useWindowSize();
     const {data, error} = useFetch('trip');
+    const today = new Date();
     const items = data?.map(item => ({
         ...item,
         address: {
             ...item.address,
             country_code: countries.find(country => country.label === item.address.country)?.value,
         },
+        outdated: new Date(item.start_date) < today,
     }));
+
+    items?.sort((current, next) => sortByOutdated(current, next));
 
     return (
         <Layout>
@@ -29,7 +36,7 @@ const Homepage = ({countries = []}) => {
             <Content>
                 {!items && (<Loader />)}
 
-                {items?.map(trip => (<Trip key={trip.id} data={trip} />))}
+                {items?.map(trip => (<Trip key={trip.id} data={trip} variant={width < 900 ? 'grid' : 'list'} />))}
             </Content>
             <Aside>
                 <p>

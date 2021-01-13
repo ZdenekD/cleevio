@@ -1,29 +1,34 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const Component = styled.aside`
     padding: 2rem 2rem 0;
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     grid-area: aside;
     position: relative;
     border-left: 1px solid var(--color-gray-lighten-4);
-
-    @media (min-width: 1200px) {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 
     p {
         margin-bottom: 2rem;
         color: var(--color-gray);
     }
 `;
-const Aside = ({children}) => (
-    <Component>
-        {children}
-    </Component>
-);
+const Aside = ({children}) => {
+    const {width} = useWindowSize();
+
+    return (
+        <>
+            {width > 1200 && (
+                <Component>
+                    {children}
+                </Component>
+            )}
+        </>
+    );
+};
 
 Aside.propTypes = {children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])};
 

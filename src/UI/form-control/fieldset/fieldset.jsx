@@ -17,7 +17,7 @@ const Component = styled.fieldset`
     }
 
     &:first-of-type {
-        margin-top: 2rem;
+        margin-top: 0;
     }
 
     &:last-of-type {

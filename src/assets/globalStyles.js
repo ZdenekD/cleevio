@@ -15,11 +15,17 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
+        --font-size: 13px;
         color: var(--color-black);
         font-family: Open Sans, Ubuntu, Tahoma, Nimbus Sans L, Free Sans, sans-serif;
-        font-size: 14px;
+        font-size: var(--font-size);
         line-height: 1.4;
         font-weight: 400;
+        transition: font-size var(--transition-duration-out) var(--transition-timing);
+
+        @media (min-width: 900px) {
+            --font-size: 14px;
+        }
     }
 
     strong {

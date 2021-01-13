@@ -5,10 +5,17 @@ import styled from 'styled-components';
 const Component = styled.main`
     min-height: 100vh;
     display: grid;
-    grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 2fr);
     grid-template-rows: var(--header-height) auto auto;
 
+    @media (min-width: 300px) {
+        grid-template-columns: 100%;
+        grid-template-areas:
+            "header"
+            "content";
+    }
+
     @media (min-width: 600px) {
+        grid-template-columns: calc(200px + 4rem) 7fr minmax(calc(30ch + 4rem), 2fr);
         grid-template-areas:
             "header header header"
             "nav content content";

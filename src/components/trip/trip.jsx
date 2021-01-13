@@ -44,13 +44,12 @@ const Component = styled.article`
         padding: 0.75rem 1rem;
 
         &:first-of-type {
-            margin-top: 2rem;
+            margin-top: 0;
         }
     `)}
 
     ${props => (props.variant === 'grid' && `
         width: 100%;
-        max-width: 45vw;
         margin-bottom: 1rem;
         padding: .75rem;
         grid-template-columns: 32px auto;
@@ -60,6 +59,11 @@ const Component = styled.article`
             "address address"
             "date date"
             "controls controls";
+    `)}
+
+    ${props => (props.outdated && `
+        opacity: .5;
+        pointer-events: none;
     `)}
 `;
 const Flag = styled.figure`
@@ -93,7 +97,7 @@ const Address = styled.address`
     ${truncate}
 `;
 const Label = styled.div`
-    margin-top: 1rem;
+    margin-top: .5rem;
     color: var(--color-gray);
 `;
 const Controls = styled.div`
@@ -113,7 +117,7 @@ const Controls = styled.div`
         flex-direction: column;
 
         a {
-            margin-top: 1rem;
+            margin-top: .5rem;
 
             &:first-of-type {
                 margin-top: 0;
@@ -124,6 +128,10 @@ const Controls = styled.div`
 const Buttons = styled.div`
     display: flex;
     justify-content: space-between;
+
+    button:not(:first-of-type) {
+        margin-left: 1rem;
+    }
 `;
 const Trip = ({data, variant = 'list', target}) => {
     const [isConfirm, setConfirm] = React.useState(false);
@@ -133,6 +141,7 @@ const Trip = ({data, variant = 'list', target}) => {
         company_name: companyName,
         start_date: startDate,
         end_date: endDate,
+        outdated,
     } = data;
 
     const handleConfirm = () => {
@@ -149,11 +158,11 @@ const Trip = ({data, variant = 'list', target}) => {
                 <Confirm isOpen>
                     <Buttons>
                         <Button onClick={handleRemove}>Yes, remove this item</Button>
-                        <Button styles={'margin-left: 1rem;'} onClick={() => setConfirm(false)}>No, I don&apos;t want remove it</Button>
+                        <Button onClick={() => setConfirm(false)}>No, I don&apos;t want remove it</Button>
                     </Buttons>
                 </Confirm>
             )}
-            <Component variant={variant}>
+            <Component outdated={outdated} variant={variant}>
                 <Flag variant={variant}>
                     {address.country_code ? (
                         <Image src={`/flags/${address.country_code}.svg`} alt={`${address.country} flag`} width="48" height="48" />
@@ -168,33 +177,36 @@ const Trip = ({data, variant = 'list', target}) => {
                     )}
                     {startDate} - {endDate}
                 </Date>
-                <Controls variant={variant}>
-                    {variant === 'list' && (
-                        <Button variant='danger' icon='trash' title="Delete this trip" onClick={handleConfirm} />
-                    )}
+                {!outdated && (
+                    <Controls variant={variant}>
+                        {variant === 'list' && (
+                            <Button variant='danger' icon='trash' title="Delete this trip" onClick={handleConfirm} />
+                        )}
 
-                    {(!target || target === 'edit') && (
-                        <Link href={{
-                            pathname: '/trip/edit/[id]',
-                            query: {id},
-                        }}>
-                            <Button asLink href='/trip/edit' variant='secondary' icon='edit' title="Edit trip">
-                                {variant === 'grid' ? ('Edit trip') : ''}
-                            </Button>
-                        </Link>
-                    )}
+                        {(!target || target === 'edit') && (
+                            <Link href={{
+                                pathname: '/trip/edit/[id]',
+                                query: {id},
+                            }}>
+                                <Button asLink href='/trip/edit' variant='secondary' icon='edit' title="Edit trip">
+                                    {variant === 'grid' ? ('Edit trip') : ''}
+                                </Button>
+                            </Link>
+                        )}
 
-                    {(!target || target === 'view') && (
-                        <Link href={{
-                            pathname: '/trip/view/[id]',
-                            query: {id},
-                        }}>
-                            <Button asLink href='/trip/view' variant='secondary' icon='arrow' title="View trip">
-                                {variant === 'grid' ? ('View trip') : ''}
-                            </Button>
-                        </Link>
-                    )}
-                </Controls>
+                        {(!target || target === 'view') && (
+                            <Link href={{
+                                pathname: '/trip/view/[id]',
+                                query: {id},
+                            }}>
+                                <Button asLink href='/trip/view' variant='secondary' icon='arrow' title="View trip">
+                                    {variant === 'grid' ? ('View trip') : ''}
+                                </Button>
+                            </Link>
+                        )}
+                    </Controls>
+                )}
+
                 <Company variant={variant}>
                     {variant === 'grid' && (
                         <Label>Company</Label>

@@ -20,10 +20,17 @@ import formatDate from '../../../helpers/formatDate';
 const Submit = styled.div`
     width: 100%;
     margin-top: 2rem;
-    padding: 1rem 0 3rem;
     display: flex;
     justify-content: center;
     border-top: 1px solid var(--color-gray-lighten-4);
+
+    @media (min-width: 300px) {
+        padding: 1rem 0;
+    }
+
+    @media (min-width: 900px) {
+        padding-bottom: 3rem;
+    }
 
     button {
         width: 100%;
@@ -121,7 +128,10 @@ const TripForm = ({data, variant = 'create'}) => {
                                 data={countriesList}
                                 defaultLabel="Select country ..."
                                 variant='flags'
-                                value={data && {value: getCountryCode(data?.address.country)?.value, label: data?.address.country}}
+                                value={data && {
+                                    value: getCountryCode(data?.address.country)?.value,
+                                    label: data?.address.country,
+                                }}
                                 disabled={isDisabled}
                                 onChange={value => prop.onChange(value.label)}
                             />

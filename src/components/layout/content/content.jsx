@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Component = styled.section`
-    padding: 0 2rem;
+    padding: 2rem 2rem 0;
     grid-area: content;
     position: relative;
 `;
