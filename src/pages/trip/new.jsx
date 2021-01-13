@@ -10,7 +10,7 @@ import Form from '../../components/form/trip';
 import Alert from '../../UI/alert';
 import Loader from '../../UI/loader';
 import options from '../../api/options';
-import fetcher from '../../api/fetcher';
+import fetcher from '../../helpers/fetcher';
 
 const Page = ({countries = []}) => {
     const {data, error} = useFetch('trip');
@@ -25,6 +25,7 @@ const Page = ({countries = []}) => {
     return (
         <Layout>
             {error && (<Alert isOpen variant="danger">{error}</Alert>)}
+
             <Header title="New trip" subtitle="Trips" />
             <Nav />
             <Content>

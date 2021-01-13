@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import fetcher from '../api/fetcher';
+import fetcher from '../helpers/fetcher';
 import options from '../api/options';
 
 const baseUrl = `${process.env.API}`;

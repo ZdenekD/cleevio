@@ -1,5 +1,6 @@
 import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {useId} from 'react-id-generator';
 import Component from 'react-select';
 import flagComponents from './flagComponents';
@@ -65,9 +66,23 @@ const styles = {
         '&:first-of-type': {borderTop: 'none'},
     }),
 };
+const Label = styled.label`
+    margin-bottom: .5rem;
+    display: block;
+    grid-area: label;
+    color: var(--color-black);
+    line-height: 20px;
+`;
+const Required = styled.span`
+    display: inline-block;
+    vertical-align: sup;
+    color: var(--color-red-lighten-2);
+    font-size: .75rem;
+`;
 const Select = forwardRef(({
     name,
-    defaultLabel,
+    label,
+    defaultValue,
     required,
     disabled,
     data,
@@ -79,21 +94,24 @@ const Select = forwardRef(({
     const components = variant === 'flags' ? flagComponents : null;
 
     return (
-        <Component
-            ref={ref}
-            required={required}
-            id={id}
-            name={name}
-            label={defaultLabel}
-            placeholder={defaultLabel}
-            aria-label={defaultLabel}
-            options={data}
-            value={value}
-            styles={styles}
-            isDisabled={disabled}
-            components={components}
-            onChange={onChange}
-        />
+        <>
+            <Label htmlFor={id}>{label} {required && (<Required>*</Required>)}</Label>
+            <Component
+                ref={ref}
+                required={required}
+                id={id}
+                name={name}
+                label={defaultValue}
+                placeholder={defaultValue}
+                aria-label={defaultValue}
+                options={data}
+                value={value}
+                styles={styles}
+                isDisabled={disabled}
+                components={components}
+                onChange={onChange}
+            />
+        </>
     );
 });
 
@@ -101,7 +119,8 @@ Select.displayName = 'Select';
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,
-    defaultLabel: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    defaultValue: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     data: PropTypes.array,

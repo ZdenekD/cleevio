@@ -8,7 +8,7 @@ import Aside from '../components/layout/aside';
 import Trip from '../components/trip';
 import Alert from '../UI/alert';
 import Loader from '../UI/loader';
-import fetcher from '../api/fetcher';
+import fetcher from '../helpers/fetcher';
 import options from '../api/options';
 import useWindowSize from '../hooks/useWindowSize';
 import sortByOutdated from '../helpers/sort';
@@ -31,6 +31,7 @@ const Homepage = ({countries = []}) => {
     return (
         <Layout>
             {error && (<Alert isOpen variant="danger">{error}</Alert>)}
+
             <Header title="Your trips" subtitle="Tips &amp; tricks" />
             <Nav />
             <Content>

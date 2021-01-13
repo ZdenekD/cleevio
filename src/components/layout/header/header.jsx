@@ -9,7 +9,7 @@ const Component = styled.header`
     display: grid;
     grid-area: header;
     background: rgba(255, 255, 255, .75);
-    box-shadow: 0 0 36px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 36px var(--color-white);
 
     @media (min-width: 300px) {
         grid-template-columns: 100%;

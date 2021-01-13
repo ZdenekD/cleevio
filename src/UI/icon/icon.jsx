@@ -5,7 +5,7 @@ import Edit from '../../assets/images/icons/edit.svg';
 import Check from '../../assets/images/icons/check.svg';
 import Star from '../../assets/images/icons/star.svg';
 import Trash from '../../assets/images/icons/trash.svg';
-import {rotate} from '../../helpers/keyframes';
+import rotate from '../../helpers/keyframes';
 
 const getIcons = ({variant}) => {
     const styles = {

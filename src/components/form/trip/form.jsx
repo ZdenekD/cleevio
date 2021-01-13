@@ -107,9 +107,9 @@ const TripForm = ({data, variant = 'create'}) => {
     return (
         <>
             {error && (<Alert isOpen variant="danger">{error}</Alert>)}
+
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Fieldset>
-                    <Legend required>Where do you want to go?</Legend>
                     <Controller
                         name="country"
                         control={control}
@@ -125,6 +125,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 ref={register}
                                 required
                                 name="country"
+                                label="Where do you want to go?"
                                 data={countriesList}
                                 defaultLabel="Select country ..."
                                 variant='flags'
@@ -137,7 +138,6 @@ const TripForm = ({data, variant = 'create'}) => {
                             />
                         )}
                     />
-
                 </Fieldset>
                 <Fieldset>
                     <Controller

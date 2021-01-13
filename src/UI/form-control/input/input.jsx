@@ -24,7 +24,7 @@ const Component = styled.input`
     background-color: var(--color-white);
     color: var(--color-gray);
     line-height: 20px;
-    transition-property: border-color box-shadow;
+    transition-property: border-color, box-shadow;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
     border-radius: var(--border-radius);
@@ -101,7 +101,9 @@ const Input = forwardRef(({
         <>
             <Control>
                 <Label htmlFor={id}>{label} {required && (<Required>*</Required>)}</Label>
+
                 {error && (<Message>{error}</Message>)}
+
                 {type === 'date' && (
                     <Datepicker
                         name={name}

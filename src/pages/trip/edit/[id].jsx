@@ -11,7 +11,7 @@ import Form from '../../../components/form/trip';
 import Alert from '../../../UI/alert';
 import Loader from '../../../UI/loader';
 import options from '../../../api/options';
-import fetcher from '../../../api/fetcher';
+import fetcher from '../../../helpers/fetcher';
 
 const Page = ({countries = []}) => {
     const {query} = useRouter();
@@ -33,6 +33,7 @@ const Page = ({countries = []}) => {
             <Content>
                 {error && (<Alert isOpen variant="danger">{error}</Alert>)}
                 {errorTrips && (<Alert isOpen variant="danger">{errorTrips}</Alert>)}
+
                 <Form data={trip} variant="update" />
             </Content>
             <Aside>
