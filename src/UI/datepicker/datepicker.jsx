@@ -1,6 +1,7 @@
 import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import {useId} from 'react-id-generator';
+import dateFnsFormat from 'date-fns/format';
 import DayPicker from 'react-day-picker/DayPickerInput';
 import Component from './styled-components';
 import prefix from '../../helpers/prefix';
@@ -17,6 +18,7 @@ const Datepicker = ({
     const input = forwardRef((props, ref) => (
         <input {...props} ref={ref} disabled={disabled} required={required} id={id} name={name} aria-label={label} />
     ));
+    const formatDate = (date, format, locale) => dateFnsFormat(date, format, locale);
 
     input.displayName = 'DatepickerInput';
 
@@ -26,10 +28,9 @@ const Datepicker = ({
                 fixedWeeks
                 name={name}
                 component={input}
-                format="dd.mm.yyyy"
-                firstDayOfWeek={1}
-                keepFocus={false}
+                format="dd. MM. yyyy"
                 placeholder = 'dd. mm. yyyy'
+                formatDate={formatDate}
                 value={value}
                 onDayChange={onChange}
             />
