@@ -14,7 +14,7 @@ const Component = styled.input`
     appearance: none;
     background-color: var(--color-white);
     vertical-align: middle;
-    transition-property: background-color border-color;
+    transition-property: background-color, border-color;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
     cursor: pointer;
@@ -37,7 +37,7 @@ const Label = styled.label`
     display: inline-block;
     background-color: var(--color-gray-lighten-3);
     color: var(--color-gray);
-    transition-property: color background-color;
+    transition-property: color, background-color;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
     cursor: pointer;

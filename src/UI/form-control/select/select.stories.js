@@ -18,9 +18,9 @@ const data = [
 export default {title: 'UI/FormControl/Select'};
 
 export const base = () => (
-    <Select name="Select" data={data} />
+    <Select name="Select" label="Label" data={data} />
 );
 
 export const disabled = () => (
-    <Select disabled name="Select" data={data} />
+    <Select disabled name="Select" label="Label" data={data} />
 );

@@ -169,23 +169,21 @@ const Trip = ({data, variant = 'list', target}) => {
                 <Component outdated={outdated} variant={variant}>
                     <Flag variant={variant}>
                         {address.country_code ? (
-                            <Image src={`/flags/${address.country_code}.svg`} alt={`${address.country} flag`} width="48" height="48" />
+                            <Image src={`/flags/${address.country_code}.svg`} alt={`${address?.country} flag`} width="48" height="48" />
                         ) : (
-                            <Image src="/placeholder.svg" alt={`${address.country} flag placeholder`} width="48" height="48" />
+                            <Image src="/placeholder.svg" alt={`${address?.country} flag placeholder`} width="48" height="48" />
                         )}
                     </Flag>
                     <Country variant={variant}><strong>{address?.country}</strong></Country>
                     <Date>
-                        {variant === 'grid' && (
-                            <Label>Date</Label>
-                        )}
+                        {variant === 'grid' && (<Label>Date</Label>)}
                         {startDate} - {endDate}
                     </Date>
 
                     {!outdated && (
                         <Controls variant={variant}>
                             {variant === 'list' && (
-                                <Button variant='danger' icon='trash' title="Delete this trip" onClick={handleConfirm} />
+                                <Button variant='danger' icon='trash' title="Delete trip" onClick={handleConfirm} />
                             )}
 
                             {(!target || target === 'edit') && (
@@ -214,9 +212,7 @@ const Trip = ({data, variant = 'list', target}) => {
 
                     {companyName && (
                         <Company variant={variant}>
-                            {variant === 'grid' && (
-                                <Label>Company</Label>
-                            )}
+                            {variant === 'grid' && (<Label>Company</Label>)}
                             {companyName}
                         </Company>
                     )}

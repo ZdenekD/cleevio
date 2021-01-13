@@ -15,7 +15,7 @@ const Component = styled.input`
         appearance: none;
         background-color: var(--color-white);
         vertical-align: middle;
-        transition-property: background-color border-color;
+        transition-property: background-color, border-color;
         transition-duration: var(--transition-duration-out);
         transition-timing-function: var(--transition-timing);
         cursor: pointer;
@@ -55,7 +55,7 @@ const Label = styled.label`
     display: inline-flex;
     background-color: var(--color-gray-lighten-3);
     color: var(--color-gray);
-    transition-property: color background-color;
+    transition-property: color, background-color;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
     cursor: pointer;
@@ -91,7 +91,7 @@ const Checkbox = forwardRef(({
         <>
             <Label htmlFor={id} disabled={disabled}>
                 <Component ref={ref} id={id} name={name} type="checkbox" checked={checked} disabled={disabled} required={required} className="_visuallyhidden" value={label} />
-                <Icon type="check" />
+                <Icon variant="check" />
                 {label}
             </Label>
         </>

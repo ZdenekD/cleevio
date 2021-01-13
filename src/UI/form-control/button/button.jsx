@@ -113,13 +113,8 @@ const Button = forwardRef(({
         as={asLink && Link}
         onClick={onClick}
     >
-        {children && (
-            <span>{children}</span>
-        )}
-
-        {icon && (
-            <Icon type={icon} />
-        )}
+        {children && (<span>{children}</span>)}
+        {icon && (<Icon variant={icon} />)}
     </Component>
 ));
 

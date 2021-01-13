@@ -21,28 +21,28 @@ export const base = () => (
     <>
         <Wrapper>
             <Row>
-                <Icon type="plus" styles={styles} />
+                <Icon variant="plus" styles={styles} />
             </Row>
             <Row>
-                <Icon type="cross" styles={styles} />
+                <Icon variant="cross" styles={styles} />
             </Row>
             <Row>
-                <Icon type="arrow" styles={styles} />
+                <Icon variant="arrow" styles={styles} />
             </Row>
             <Row>
-                <Icon type="loader" styles={styles} />
+                <Icon variant="loader" styles={styles} />
             </Row>
             <Row>
-                <Icon type="trash" styles={styles} />
+                <Icon variant="trash" styles={styles} />
             </Row>
             <Row>
-                <Icon type="edit" styles={styles} />
+                <Icon variant="edit" styles={styles} />
             </Row>
             <Row>
-                <Icon type="check" styles={styles} />
+                <Icon variant="check" styles={styles} />
             </Row>
             <Row>
-                <Icon type="hamburger" styles={'width: 32px; height: 16px;'} />
+                <Icon variant="hamburger" styles={'width: 32px; height: 16px;'} />
             </Row>
         </Wrapper>
     </>

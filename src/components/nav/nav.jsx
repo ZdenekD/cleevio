@@ -52,10 +52,12 @@ const Anchor = styled.a`
     align-items: center;
     grid-area: nav;
     text-decoration: none;
-    transition-property: color border-color;
+    transition-property: color, border-color;
     transition-duration: var(--transition-duration-out);
     transition-timing-function: var(--transition-timing);
     color: ${props => (props.isActive ? 'var(--color-black)' : 'var(--color-gray-darken-1)')};
+
+    ${props => (props.disable && 'pointer-events: none;')}
 
     &:focus,
     &:hover {
@@ -103,6 +105,7 @@ const Nav = () => {
                     <Button icon={isOpen ? 'cross' : 'hamburger'} variant="secondary" onClick={handleMenu} />
                 </Menu>
             )}
+
             <Component isOpen={isOpen}>
                 <Link passHref href="/trip/new">
                     <Button asLink href="/trip/new" icon="plus" styles={'min-width: 100%;'}>New Trip</Button>
@@ -118,7 +121,7 @@ const Nav = () => {
                     </li>
                     <li>
                         <Link href="/">
-                            <Anchor disabled href="/">
+                            <Anchor disable href="/">
                                 <IconEdit />
                                 Future feature
                             </Anchor>
@@ -126,7 +129,7 @@ const Nav = () => {
                     </li>
                     <li>
                         <Link href="/">
-                            <Anchor disabled href="/">
+                            <Anchor disable href="/">
                                 <IconGlobe />
                                 Future section
                             </Anchor>

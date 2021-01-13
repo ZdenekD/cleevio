@@ -55,8 +55,8 @@ const TripForm = ({data, variant = 'create'}) => {
         setDisabled(true);
 
         const body = {
-            start_date: formatDate(values.start_date),
-            end_date: formatDate(values.end_date),
+            start_date: values.start_date,
+            end_date: values.end_date,
             company_name: values.company_name || '',
             address: {
                 street: values.street || '',
@@ -65,7 +65,7 @@ const TripForm = ({data, variant = 'create'}) => {
                 zip: values.zip || '',
             },
             covid: values.covid === 'Yes',
-            covid_test_date: values.covid_test_date ? formatDate(values.covid_test_date) : '',
+            covid_test_date: values.covid_test_date || '',
         };
 
         if (variant === 'create') {
@@ -107,9 +107,9 @@ const TripForm = ({data, variant = 'create'}) => {
     return (
         <>
             {error && (<Alert isOpen variant="danger">{error}</Alert>)}
+
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Fieldset>
-                    <Legend required>Where do you want to go?</Legend>
                     <Controller
                         name="country"
                         control={control}
@@ -125,6 +125,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 ref={register}
                                 required
                                 name="country"
+                                label="Where do you want to go?"
                                 data={countriesList}
                                 defaultLabel="Select country ..."
                                 variant='flags'
@@ -133,11 +134,10 @@ const TripForm = ({data, variant = 'create'}) => {
                                     label: data?.address.country,
                                 }}
                                 disabled={isDisabled}
-                                onChange={value => prop.onChange(value.label)}
+                                onChange={value => value && prop.onChange(value.label)}
                             />
                         )}
                     />
-
                 </Fieldset>
                 <Fieldset>
                     <Controller
@@ -160,7 +160,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 value={data?.start_date}
                                 disabled={isDisabled}
                                 error={errors.start_date?.message}
-                                onChange={value => prop.onChange(value)}
+                                onChange={value => value && prop.onChange(formatDate(value))}
                             />
                         )}
                     />
@@ -184,7 +184,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                 value={data?.end_date}
                                 disabled={isDisabled}
                                 error={errors.end_date?.message}
-                                onChange={value => prop.onChange(value)}
+                                onChange={value => prop.onChange(formatDate(value))}
                             />
                         )}
                     />
@@ -294,7 +294,7 @@ const TripForm = ({data, variant = 'create'}) => {
                                         value={data?.covid_test_date}
                                         disabled={isDisabled}
                                         error={errors.covid_test_date?.message}
-                                        onChange={value => prop.onChange(value)}
+                                        onChange={value => value && prop.onChange(formatDate(value))}
                                     />
                                 )}
                             />
