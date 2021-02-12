@@ -47,7 +47,6 @@ const TripForm = ({data, variant = 'create'}) => {
     const [isDisabled, setDisabled] = React.useState(false);
     const {data: countries, error} = useFetch(countriesList.length < 1 ? 'country' : null);
     const router = useRouter();
-    const {query} = useRouter();
     const {register, errors, control, handleSubmit, watch, setValue} = useForm({mode: 'onBlur'});
     const isOpen = watch('covid') === 'Yes';
     const getCountryCode = value => countriesList.find(country => country.label === value);
@@ -73,7 +72,7 @@ const TripForm = ({data, variant = 'create'}) => {
         }
 
         if (variant === 'update') {
-            await update(query.id, body);
+            await update(router.query.id, body);
         }
 
         router.push('/');
