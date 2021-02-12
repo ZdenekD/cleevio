@@ -66,7 +66,7 @@ const Homepage = ({countries = []}) => {
 };
 
 export async function getStaticProps() {
-    const countries = await fetcher(`${process.env.API}/country`, options.get());
+    const countries = await fetcher(`${process.env.NEXT_PUBLIC_API}/country`, options.get());
 
     return {props: {countries}};
 }

@@ -1,5 +1,5 @@
 import options from '../options';
 
-const remove = id => fetch(`${process.env.API}/trip/${id}`, options.delete());
+const remove = id => fetch(`${process.env.NEXT_PUBLIC_API}/trip/${id}`, options.delete());
 
 export default remove;
